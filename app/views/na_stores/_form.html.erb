@@ -1,0 +1,22 @@
+<%= form_for na_store do |f| %>
+  <% NA_HEADERS.in_groups_of(3) do |header_group| %>
+    <div class="row">
+      <% header_group.each do |h| %>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <%= f.label h, class: 'control-label' %>
+            <%= f.text_field h, class: 'form-control' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <%= f.submit, 'Create Store' class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>

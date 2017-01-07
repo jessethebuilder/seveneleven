@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Intl Stores</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @intl_stores.each do |intl_store| %>
+      <tr>
+        <td><%= intl_store. %></td>
+        <td><%= intl_store. %></td>
+        <td><%= intl_store. %></td>
+        <td><%= intl_store. %></td>
+        <td><%= intl_store. %></td>
+        <td><%= intl_store. %></td>
+        <td><%= intl_store. %></td>
+        <td><%= intl_store. %></td>
+        <td><%= link_to 'Show', intl_store %></td>
+        <td><%= link_to 'Edit', edit_intl_store_path(intl_store) %></td>
+        <td><%= link_to 'Destroy', intl_store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Intl Store', new_intl_store_path %>

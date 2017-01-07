@@ -1,0 +1,1 @@
+json.partial! "na_stores/na_store", na_store: @na_store

@@ -1,0 +1,2 @@
+module NaStoresHelper
+end
