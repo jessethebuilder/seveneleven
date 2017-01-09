@@ -1,5 +1,14 @@
 <div id="na_store">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <%= quick_options ["Edit", edit_na_store_path(@na_store)],
+                          ["Index", na_stores_path],
+                          ["New", new_na_store_path] %>
+
   <%= page_header "North American Store" %>
+
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
@@ -19,16 +28,6 @@
           <% else %>
             <strong>No Store Image</strong>
           <% end %>
-        </p>
-
-        <p>
-          <div class="form-group">
-            <%= link_to "Edit", edit_na_store_path(@na_store), class: 'btn btn-warning' %>
-          </div>
-          <div class="form-group">
-            <%= link_to "Index", na_stores_path, class: 'btn btn-primary' %>
-            <%= link_to "New", new_na_store_path, class: 'btn btn-default' %>
-          </div>
         </p>
       </div>
     </div>

@@ -23,6 +23,8 @@ NaStore.destroy_all
 
 first = true
 
+counter = 0
+
 CSV.foreach(Rails.root.join('data/na.csv')) do |row|
     s = NaStore.new
     # r = row.split(', ')
@@ -34,6 +36,8 @@ CSV.foreach(Rails.root.join('data/na.csv')) do |row|
     end
 
     first = false
+    counter += 1
+    break if counter == 100
 end
 
 puts "na complete"

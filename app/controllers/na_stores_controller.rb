@@ -4,9 +4,9 @@ class NaStoresController < ApplicationController
   # GET /na_stores
   # GET /na_stores.json
   def index
-    order_by = params[:order_by] || "location"
-    order_direction = params[:order_direction] || 'asc'
-    @na_stores = NaStore.all.order(order_by => order_direction)
+    @order_by = params[:order_by] || "location"
+    @order_direction = params[:order_direction] || 'asc'
+    @na_stores = NaStore.all.order(@order_by => @order_direction)
   end
 
   # GET /na_stores/1
@@ -58,7 +58,7 @@ class NaStoresController < ApplicationController
   def destroy
     @na_store.destroy
     respond_to do |format|
-      format.html { redirect_to na_stores_url, notice: 'Na store was successfully destroyed.' }
+      format.html { redirect_to na_stores_url, notice: "North American store #{@na_store.location} was DELETED"}
       format.json { head :no_content }
     end
   end

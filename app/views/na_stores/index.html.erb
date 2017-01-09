@@ -1,16 +1,33 @@
 <div id="na_stores">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <%= quick_options ["New", new_na_store_path] %>
+      </div>
+    </div>
+  </div>
+
   <%= page_header "North American Stores" %>
 
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <table class="table table-striped">
+        <table id="na_store_table" class="table table-striped">
           <thead>
-            <th>Location</th>
-            <th>Market</th>
+            <th>Select</th>
+            <th>
+              <%= link_to 'Location', "#", data: {order_by: 'location'} %>
+            </th>
+            <th>
+              <%= link_to 'Market', '#', data: {order_by: 'market'} %>
+            </th>
             <th>Address</th>
-            <th>City</th>
-            <th>State or Province</th>
+            <th>
+              <%= link_to 'City', '#', data: {order_by: 'city'} %>
+            </th>
+            <th>
+              <%= link_to 'St', '#', data: {order_by: 'state_or_province'} %>
+            </th>
             <!-- <th>Postal Code</th> -->
             <th>Country</th>
             <th>Phone Number</th>
@@ -20,7 +37,8 @@
           <tbody>
             <% @na_stores.each do |s| %>
               <tr>
-                <td><%= s.location %></td>
+                <td><%= check_box_tag s.id %></td>
+                <td><%= link_to s.location, s, target: "_blank" %></td>
                 <td><%= s.market %></td>
                 <td><%= s.address %></td>
                 <td><%= s.city %></td>
@@ -31,8 +49,8 @@
                   <%= link_to s.phone_number, "tel:#{s.phone_number}" %>
                 </td>
                 <td>
-                  <%= link_to "View", na_store_path(s), class: 'btn btn-primary btn-sm' %>
-                  <%= link_to "Edit", edit_na_store_path(s), class: 'btn btn-warning btn-sm' %>
+                  <%= link_to "Edit", edit_na_store_path(s), class: 'btn btn-warning btn-sm',
+                              target: '_blank' %>
                   <%= link_to "Destroy", na_store_path(s), method: :delete,
                               class: 'btn btn-danger btn-sm',
                               data: {confirm: "Are you sure? This is peranent!"} %>
@@ -45,3 +63,11 @@
     </div>
   </div>
 </div>
+
+<script>
+
+
+  $(document).ready(function(){
+    activateTableMenu('#na_store_table', '<%= @order_by %>', '<%= @order_direction %>');
+  });
+</script>
