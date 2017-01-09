@@ -34,10 +34,10 @@ gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'mini_magick'
 
-gem 'activerecord'
+# gem 'activerecord'
 
 # Anysoft Gems
-gem 'farm_shed', git: 'https://github.com/jessethebuilder/farm_shed'
+# gem 'farm_shed', git: 'https://github.com/jessethebuilder/farm_shed'
 gem 'farm_ruby', git: 'https://github.com/jessethebuilder/farm_ruby'
 
 group :development, :test do

@@ -1,0 +1,44 @@
+//--------Quick Options -----------------
+$quick_options_dark: black;
+$quick_options_light: grey;
+
+
+.quick_option_selected{
+  border-right-color: $quick_options_dark !important;
+  a{
+    //    color: $calendar_light !important;
+  }
+}
+
+.quick_options{
+  font-size: 20px;
+  float: right;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  line-height: 30px;
+
+  li{
+    margin-bottom: 10px;
+    list-style: none;
+    text-align: right;
+    border-right: 2px solid $quick_options_light;
+    margin-bottom: 3px;
+    padding-right: 5px;
+    border-bottom-width: 0px !important;
+  }
+
+  a{
+    color: $quick_options_dark;
+    display: block;
+  }
+  a:hover{
+    background-color: transparent;
+    color: $quick_options_dark;
+  }
+  a:link{
+    text-decoration: none;
+  }
+  a:visited{
+    color: $quick_options_dark;
+  }
+}
