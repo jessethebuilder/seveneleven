@@ -20,5 +20,5 @@
 /config/environments/test.rb
 
 /public/uploads
-/data
-/db/seeds.rb
+#/data
+#/db/seeds.rb
