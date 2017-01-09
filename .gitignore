@@ -18,3 +18,7 @@
 
 /config/environments/development.rb
 /config/environments/test.rb
+
+/public/uploads
+/data
+/db/seeds.rb

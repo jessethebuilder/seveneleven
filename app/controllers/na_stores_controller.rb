@@ -4,7 +4,9 @@ class NaStoresController < ApplicationController
   # GET /na_stores
   # GET /na_stores.json
   def index
-    @na_stores = NaStore.all
+    order_by = params[:order_by] || "location"
+    order_direction = params[:order_direction] || 'asc'
+    @na_stores = NaStore.all.order(order_by => order_direction)
   end
 
   # GET /na_stores/1
@@ -75,6 +77,7 @@ class NaStoresController < ApplicationController
                                        :state_or_province, :postal_code, :country, :open_status_code,
                                        :open_date, :close_date, :vicinity, :phone_number, :cdc_code, :cdc_name,
                                        :wholesale_center, :dma_code, :dma_name, :wholesale_center, :alcohol_flag,
-                                       :liquor_flag, :gas_flag, :gas_brand, :bcp, :store_name, :store_type, :region, :fc_email)
+                                       :liquor_flag, :gas_flag, :gas_brand, :bcp, :store_name, :store_type, :region, :fc_email,
+                                       :store_image, :store_image_cache, :remote_store_image_url, :remove_store_image)
     end
 end

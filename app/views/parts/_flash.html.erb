@@ -1,0 +1,19 @@
+<% if alert -%>
+	<div class="container flash" id="flash_alert">
+		<div class="row">
+			<div class="col-xs-12">
+				<h4 class="text-danger"><%= alert %></h4>
+			</div>
+		</div>
+	</div>
+<% end -%>
+
+<% if notice -%>
+	<div class="container flash" id="flash_notice">
+		<div class="row">
+			<div class="col-xs-12">
+				<h4 class="text-info"><%= notice %></h4>
+			</div>
+		</div>
+	</div>
+<% end -%>

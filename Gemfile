@@ -29,6 +29,9 @@ gem 'jbuilder', '~> 2.5'
 
 #Added Gems-------------------------------------
 gem 'bootstrap-sass'
+gem 'carrierwave'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'mini_magick'
 
 
 # Anysoft Gems

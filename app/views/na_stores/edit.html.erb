@@ -1,6 +1,6 @@
-<h1>Editing Na Store</h1>
-
-<%= render 'form', na_store: @na_store %>
-
-<%= link_to 'Show', @na_store %> |
-<%= link_to 'Back', na_stores_path %>
+<div id="edit_na_store">
+  <%= page_header "Edit North American Store" %>
+  <div class="container">
+    <%= render 'form', na_store: @na_store %>
+  </div>
+</div>

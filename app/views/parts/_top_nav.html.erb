@@ -1,0 +1,26 @@
+<div id='top_nav' class='navbar navbar-fixed-top navbar-inverse' role='navigation'>
+  <div class="container">
+    <div class='navbar-header'>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#top_nav_body">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "root_path", :class => 'navbar-brand' do %>
+      	7-11 Stores
+      <% end %>
+    </div>
+
+    <div id='top_nav_body' class='collapse navbar-collapse'>
+      	<ul class='nav navbar-nav navbar-right'>
+          <li>
+            <%= link_to "North American", na_stores_path %>
+          </li>
+          <li>
+            <%= link_to "International", intl_stores_path %>
+          </li>
+        </ul>
+    </div>
+  </div>
+</div>

@@ -1,103 +1,47 @@
-<p id="notice"><%= notice %></p>
+<div id="na_stores">
+  <%= page_header "North American Stores" %>
 
-<h1>Na Stores</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <table class="table table-striped">
+          <thead>
+            <th>Location</th>
+            <th>Market</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State or Province</th>
+            <!-- <th>Postal Code</th> -->
+            <th>Country</th>
+            <th>Phone Number</th>
+            <th colspan="3">
+          </thead>
 
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @na_stores.each do |na_store| %>
-      <tr>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= na_store. %></td>
-        <td><%= link_to 'Show', na_store %></td>
-        <td><%= link_to 'Edit', edit_na_store_path(na_store) %></td>
-        <td><%= link_to 'Destroy', na_store, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Na Store', new_na_store_path %>
+          <tbody>
+            <% @na_stores.each do |s| %>
+              <tr>
+                <td><%= s.location %></td>
+                <td><%= s.market %></td>
+                <td><%= s.address %></td>
+                <td><%= s.city %></td>
+                <td><%= s.state_or_province %></td>
+                <!-- <td><%= s.postal_code %></td> -->
+                <td><%= s.country %></td>
+                <td>
+                  <%= link_to s.phone_number, "tel:#{s.phone_number}" %>
+                </td>
+                <td>
+                  <%= link_to "View", na_store_path(s), class: 'btn btn-primary btn-sm' %>
+                  <%= link_to "Edit", edit_na_store_path(s), class: 'btn btn-warning btn-sm' %>
+                  <%= link_to "Destroy", na_store_path(s), method: :delete,
+                              class: 'btn btn-danger btn-sm',
+                              data: {confirm: "Are you sure? This is peranent!"} %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
