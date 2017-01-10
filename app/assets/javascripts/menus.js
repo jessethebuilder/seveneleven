@@ -1,3 +1,15 @@
+function indicateOrder(table_selector){
+  // Relies on classes set in activateTableMenu
+  var table = $(table_selector);
+  var selected = table.find('th').find('.selected');
+
+  var direction = $(selected).hasClass('desc') ? "up" : "down"
+  var indicator = $('<span></span>');
+  indicator.addClass('glyphicon');
+  indicator.addClass('glyphicon-chevron-' + direction);
+  selected.append(indicator);
+}
+
 function activateTableMenu(table_selector, selected, direction){
   var table = $(table_selector);
   var headers = $(table).find('th').find('a');
@@ -14,7 +26,9 @@ function activateTableMenu(table_selector, selected, direction){
     if(order_by === selected){
       h.attr('href', h.attr('href') + '&order_direction=' + next_direction);
       h.addClass('selected');
-      h.addClass(next_direction);
+      h.addClass(direction);
     }
   }
+
+  indicateOrder(table_selector);
 }
