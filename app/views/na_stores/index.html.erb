@@ -19,7 +19,7 @@
               <%= link_to 'Location', "#", data: {order_by: 'location'} %>
             </th>
             <th>
-              <%= link_to 'Market', '#', data: {order_by: 'market'} %>
+              <%= link_to 'Franchisee', '#', data: {order_by: 'franchisee_name'} %>
             </th>
             <th>Address</th>
             <th>
@@ -31,15 +31,19 @@
             <!-- <th>Postal Code</th> -->
             <th>Country</th>
             <th>Phone</th>
-            <th colspan="3">
+            <th></th>
+            <th></th>
+            <% if user_is_admin? %>
+             <th></th>
+            <% end %>
           </thead>
 
           <tbody>
             <% @na_stores.each do |s| %>
               <tr>
-                <td><%= check_box_tag s.id %></td>
-                <td><%= link_to s.location, s, target: "_blank" %></td>
-                <td><%= s.market %></td>
+                <td><%= check_box_tag s.id, s.id, is_in_current_store_list?(s), class: 'store_select' %></td>
+                <td><%= s.location %></td>
+                <td><%= s.fz_name %></td>
                 <td><%= s.address %></td>
                 <td><%= s.city %></td>
                 <td><%= s.state_or_province %></td>
@@ -49,12 +53,20 @@
                   <%= link_to s.phone_number, "tel:#{s.phone_number}" %>
                 </td>
                 <td>
+                  <%= link_to "View", na_store_path(s), class: 'btn btn-default btn-sm',
+                              target: '_blank' %>
+                <td>
                   <%= link_to "Edit", edit_na_store_path(s), class: 'btn btn-warning btn-sm',
                               target: '_blank' %>
-                  <%= link_to "Destroy", na_store_path(s), method: :delete,
-                              class: 'btn btn-danger btn-sm',
-                              data: {confirm: "Are you sure? This is peranent!"} %>
                 </td>
+                <% if user_is_admin? %>
+                  <td>
+
+                    <%= link_to "Destroy", na_store_path(s), method: :delete,
+                                class: 'btn btn-danger btn-sm',
+                                data: {confirm: "Are you sure? This is peranent!"} %>
+                  </td>
+                <% end %>
               </tr>
             <% end %>
           </tbody>
@@ -67,7 +79,10 @@
 <script>
 
 
+
+
   $(document).ready(function(){
     activateTableMenu('#na_store_table', '<%= @order_by %>', '<%= @order_direction %>');
+    updateCurrentStoreListOnCheck('na');
   });
 </script>

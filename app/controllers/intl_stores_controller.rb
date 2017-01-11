@@ -1,10 +1,14 @@
 class IntlStoresController < ApplicationController
   before_action :set_intl_store, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :authenticate_admin!, only: [:destroy]
 
   # GET /intl_stores
   # GET /intl_stores.json
   def index
-    @intl_stores = IntlStore.all
+    @order_by = params[:order_by] || "country"
+    @order_direction = params[:order_direction] || 'asc'
+    @intl_stores = IntlStore.all.order(@order_by => @order_direction)
   end
 
   # GET /intl_stores/1
@@ -29,10 +33,10 @@ class IntlStoresController < ApplicationController
     respond_to do |format|
       if @intl_store.save
         format.html { redirect_to @intl_store, notice: 'Intl store was successfully created.' }
-        format.json { render :show, status: :created, location: @intl_store }
+        # format.json { render :show, status: :created, location: @intl_store }
       else
         format.html { render :new }
-        format.json { render json: @intl_store.errors, status: :unprocessable_entity }
+        # format.json { render json: @intl_store.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,10 +47,10 @@ class IntlStoresController < ApplicationController
     respond_to do |format|
       if @intl_store.update(intl_store_params)
         format.html { redirect_to @intl_store, notice: 'Intl store was successfully updated.' }
-        format.json { render :show, status: :ok, location: @intl_store }
+        # format.json { render :show, status: :ok, location: @intl_store }
       else
         format.html { render :edit }
-        format.json { render json: @intl_store.errors, status: :unprocessable_entity }
+        # format.json { render json: @intl_store.errors, status: :unprocessable_entity }
       end
     end
   end

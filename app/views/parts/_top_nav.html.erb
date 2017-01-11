@@ -20,6 +20,14 @@
           <li>
             <%= link_to "International", intl_stores_path %>
           </li>
+          <li>
+            <%= link_to store_list_path(current_store_list) do %>
+              Current List:
+              <span id="current_store_list_box">
+                <%= render partial: 'store_lists/current_store_list' %>
+              </span>
+            <% end %>
+          </li>
         </ul>
     </div>
   </div>

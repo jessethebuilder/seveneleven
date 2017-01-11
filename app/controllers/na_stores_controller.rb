@@ -1,5 +1,7 @@
 class NaStoresController < ApplicationController
   before_action :set_na_store, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :authenticate_admin!, only: [:destroy]
 
   # GET /na_stores
   # GET /na_stores.json

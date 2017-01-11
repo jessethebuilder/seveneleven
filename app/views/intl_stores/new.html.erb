@@ -1,5 +1,6 @@
-<h1>New Intl Store</h1>
-
-<%= render 'form', intl_store: @intl_store %>
-
-<%= link_to 'Back', intl_stores_path %>
+<div id="new_intl_store" class="new_store">
+  <%= page_header "New International Store" %>
+  <div class="container">
+    <%= render 'form', intl_store: @intl_store %>
+  </div>
+</div>

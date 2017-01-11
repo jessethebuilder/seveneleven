@@ -1,12 +1,20 @@
 <%= form_for na_store do |f| %>
+  <div class="row">
+    <div class="col-xs-12">
+      <%= error_explanation na_store %>
+    </div>
+  </div>
+
   <% NA_HEADERS.in_groups_of(3) do |header_group| %>
     <div class="row">
       <% header_group.each do |h| %>
         <div class="col-sm-4">
-          <div class="form-group">
-            <%= f.label h, class: 'control-label' %>
-            <%= f.text_field h, class: 'form-control' %>
-          </div>
+          <% if h %>
+            <div class="form-group">
+              <%= f.label h, class: 'control-label' %>
+              <%= f.text_field h, class: 'form-control' %>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>

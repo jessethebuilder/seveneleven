@@ -1,44 +1,35 @@
-<p id="notice"><%= notice %></p>
+<div id="intl_store">
 
-<p>
-  <strong>:</strong>
-  <%= @intl_store. %>
-</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <%= quick_options ["Edit", edit_intl_store_path(@intl_store)],
+                          ["Index", intl_stores_path],
+                          ["New", new_intl_store_path] %>
 
-<p>
-  <strong>:</strong>
-  <%= @intl_store. %>
-</p>
+  <%= page_header "International Store" %>
 
-<p>
-  <strong>:</strong>
-  <%= @intl_store. %>
-</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <% INTL_HEADERS.each do |h| %>
+          <p>
+            <%= h.to_s.titlecase %>:
+            <strong>
+              <%= @intl_store.send(h) %>
+            </strong>
+          </p>
+        <% end %>
 
-<p>
-  <strong>:</strong>
-  <%= @intl_store. %>
-</p>
-
-<p>
-  <strong>:</strong>
-  <%= @intl_store. %>
-</p>
-
-<p>
-  <strong>:</strong>
-  <%= @intl_store. %>
-</p>
-
-<p>
-  <strong>:</strong>
-  <%= @intl_store. %>
-</p>
-
-<p>
-  <strong>:</strong>
-  <%= @intl_store. %>
-</p>
-
-<%= link_to 'Edit', edit_intl_store_path(@intl_store) %> |
-<%= link_to 'Back', intl_stores_path %>
+        <p>
+          Store Image:
+          <% if @intl_store.store_image? %>
+            <%= image_tag @intl_store.store_image.url(:thumb) %>
+          <% else %>
+            <strong>No Store Image</strong>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

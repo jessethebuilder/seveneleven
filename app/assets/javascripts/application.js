@@ -1,6 +1,6 @@
 //= require jquery
 //= require bootstrap
 //= require jquery_ujs
-//= require html_helper
+//= require farm_shed/all
 //= require turbolinks
 //= require menus

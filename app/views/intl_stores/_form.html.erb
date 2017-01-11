@@ -1,57 +1,33 @@
-<%= form_for(intl_store) do |f| %>
-  <% if intl_store.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(intl_store.errors.count, "error") %> prohibited this intl_store from being saved:</h2>
 
-      <ul>
-      <% intl_store.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<%= form_for intl_store do |f| %>
+  <div class="row">
+    <div class="col-xs-12">
+      <%= error_explanation intl_store %>
+    </div>
+  </div>
+
+  <% INTL_HEADERS.in_groups_of(3) do |header_group| %>
+    <div class="row">
+      <% header_group.each do |h| %>
+        <div class="col-sm-4">
+          <% if h %>
+            <div class="form-group">
+              <%= f.label h, class: 'control-label' %>
+              <%= f.text_field h, class: 'form-control' %>
+            </div>
+          <% end %>
+        </div>
       <% end %>
-      </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label : %>
-    <%= f.text_field : %>
-  </div>
+  <%= image_select f, :store_image, :accepts_remote_url => true %>
 
-  <div class="field">
-    <%= f.label : %>
-    <%= f.text_field : %>
-  </div>
-
-  <div class="field">
-    <%= f.label : %>
-    <%= f.text_field : %>
-  </div>
-
-  <div class="field">
-    <%= f.label : %>
-    <%= f.text_field : %>
-  </div>
-
-  <div class="field">
-    <%= f.label : %>
-    <%= f.text_field : %>
-  </div>
-
-  <div class="field">
-    <%= f.label : %>
-    <%= f.text_field : %>
-  </div>
-
-  <div class="field">
-    <%= f.label : %>
-    <%= f.text_field : %>
-  </div>
-
-  <div class="field">
-    <%= f.label : %>
-    <%= f.text_field : %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <%= f.submit 'Create Store', class: 'btn btn-primary' %>
+      </div>
+    </div>
   </div>
 <% end %>

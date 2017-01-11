@@ -32,3 +32,25 @@ function activateTableMenu(table_selector, selected, direction){
 
   indicateOrder(table_selector);
 }
+
+function updateCurrentStoreListOnCheck(store_type){
+  // store_type used for routing AJAX request
+  var selects = $('.store_select');
+
+  for(var i = 0; i < selects.length; i++){
+    $(selects[i]).change(function(){
+      if(this.checked){
+
+      $.ajax({
+          method: 'POST',
+          url: '/store_lists/add_to_current?store_type=' + store_type + '&store_id=' + this.id
+        });
+      } else {
+        $.ajax({
+          method: 'POST',
+          url: '/store_lists/remove_from_current?store_type=' + store_type + '&store_id=' + this.id
+        });
+      }
+    });
+  }
+}
