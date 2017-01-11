@@ -16,7 +16,8 @@ module UserHelper
   end
 
   def build_current_store_list
-    current_user.current_store_list = StoreList.create
+    current_user.current_store_list = StoreList.new
+    current_user.save!
     current_user.current_store_list
   end
 end

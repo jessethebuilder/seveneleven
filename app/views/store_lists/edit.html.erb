@@ -1,4 +1,4 @@
-<div class="edit_store_list">
+<div id="edit_store_list">
   <%= page_header "Edit Store List" %>
 
   <div class="container">
@@ -30,19 +30,23 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-xs-12">
-          <h2>North American Stores</h2>
-          <%= render partial: 'na_stores/table', locals: {na_stores: @store_list.na_stores} %>
+      <% unless @store_list.na_stores.empty? %>
+        <div class="row">
+          <div class="col-xs-12">
+            <h2>North American Stores</h2>
+            <%= render partial: 'na_stores/table', locals: {na_stores: @store_list.na_stores} %>
+          </div>
         </div>
-      </div>
+      <% end %>
 
-      <div class="row">
-        <div class="col-xs-12">
-          <h2>International Stores</h2>
-          <%= render partial: 'intl_stores/table', locals: {intl_stores: @store_list.intl_stores} %>
+      <% unless @store_list.intl_stores.empty? %>
+        <div class="row">
+          <div class="col-xs-12">
+            <h2>International Stores</h2>
+            <%= render partial: 'intl_stores/table', locals: {intl_stores: @store_list.intl_stores} %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   <% end %>
 </div>

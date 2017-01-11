@@ -53,9 +53,9 @@ public
   # GET /store_lists.json
   def index
     if user_is_admin?
-      @store_lists = StoreList.all.order(:user_id)
+      @store_lists = StoreList.where(published: true).order(:user_id)
     else
-      @store_lists = current_user.store_lists
+      @store_lists = current_user.store_lists.where(published: true)
     end
   end
 
@@ -74,6 +74,13 @@ public
   def update
     respond_to do |format|
       if @store_list.update(store_list_params)
+        u = current_user
+        csl = u.current_store_list.dup
+        u.current_store_list.remove
+        u.store_lists << csl
+        u.current_store_list = StoreList.new 
+        u.save!
+
         format.html { redirect_to store_lists_url, notice: "#{@store_list.name} was Published." }
         # format.json { render :show, status: :ok, location: @store_list }
       else
