@@ -52,49 +52,33 @@ public
   # GET /store_lists
   # GET /store_lists.json
   def index
-    @store_lists = StoreList.all
+    if user_is_admin?
+      @store_lists = StoreList.all.order(:user_id)
+    else
+      @store_lists = current_user.store_lists
+    end
   end
 
   # GET /store_lists/1
   # GET /store_lists/1.json
   def show
-  end
-
-  # GET /store_lists/new
-  def new
-    @store_list = StoreList.new
-  end
-
-  # GET /store_lists/1/edit
-  def edit
-  end
-
-  # POST /store_lists
-  # POST /store_lists.json
-  def create
-    @store_list = StoreList.new(store_list_params)
-
     respond_to do |format|
-      if @store_list.save
-        format.html { redirect_to @store_list, notice: 'Store list was successfully created.' }
-        format.json { render :show, status: :created, location: @store_list }
-      else
-        format.html { render :new }
-        format.json { render json: @store_list.errors, status: :unprocessable_entity }
-      end
+      format.html { render :edit }
+      format.json
     end
   end
 
-  # PATCH/PUT /store_lists/1
-  # PATCH/PUT /store_lists/1.json
+  def edit
+  end
+
   def update
     respond_to do |format|
       if @store_list.update(store_list_params)
-        format.html { redirect_to @store_list, notice: 'Store list was successfully updated.' }
-        format.json { render :show, status: :ok, location: @store_list }
+        format.html { redirect_to store_lists_url, notice: "#{@store_list.name} was Published." }
+        # format.json { render :show, status: :ok, location: @store_list }
       else
         format.html { render :edit }
-        format.json { render json: @store_list.errors, status: :unprocessable_entity }
+        # format.json { render json: @store_list.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -104,8 +88,8 @@ public
   def destroy
     @store_list.destroy
     respond_to do |format|
-      format.html { redirect_to store_lists_url, notice: 'Store list was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to store_lists_url, notice: "#{@store_list.name} was destroyed." }
+      # format.json { head :no_content }
     end
   end
 
@@ -117,6 +101,6 @@ public
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def store_list_params
-      params.require(:store_list).permit(:user_id, :name)
+      params.require(:store_list).permit(:user_id, :name, :published)
     end
 end

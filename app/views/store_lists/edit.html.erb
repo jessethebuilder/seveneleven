@@ -1,6 +1,53 @@
-<h1>Editing Store List</h1>
+<div class="edit_store_list">
+  <%= page_header "Edit Store List" %>
 
-<%= render 'form', store_list: @store_list %>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <%= error_explanation @store_list %>
+      </div>
+    </div>
+  </div>
 
-<%= link_to 'Show', @store_list %> |
-<%= link_to 'Back', store_lists_path %>
+  <%= form_for @store_list do |f| %>
+    <%= f.hidden_field :published, value: true %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <%= f.label :name, class: 'control-label' %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <%= f.submit 'Publish', class: 'btn btn-primary' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>North American Stores</h2>
+          <%= render partial: 'na_stores/table', locals: {na_stores: @store_list.na_stores} %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>International Stores</h2>
+          <%= render partial: 'intl_stores/table', locals: {intl_stores: @store_list.intl_stores} %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  updateCurrentStoreListOnCheck('na');
+  updateCurrentStoreListOnCheck('intl');
+</script>

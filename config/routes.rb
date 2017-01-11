@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :na_stores
   resources :intl_stores
-  resources :store_lists do
+  resources :store_lists, except: [:new, :create] do
     collection do
       post 'add_to_current'
       post 'remove_from_current'

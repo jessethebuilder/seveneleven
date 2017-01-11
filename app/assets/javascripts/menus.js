@@ -35,7 +35,7 @@ function activateTableMenu(table_selector, selected, direction){
 
 function updateCurrentStoreListOnCheck(store_type){
   // store_type used for routing AJAX request
-  var selects = $('.store_select');
+  var selects = $('#' + store_type + '_store_table').find('.store_select');
 
   for(var i = 0; i < selects.length; i++){
     $(selects[i]).change(function(){

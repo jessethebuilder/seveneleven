@@ -1,0 +1,18 @@
+#footer{
+  padding-bottom: 40px;
+  background-color: $main_contrast;
+
+  a{
+    color: $navbar-inverse-link-color;
+    text-transform:capitalize;
+  }
+  a:hover{
+    color: $navbar-inverse-link-hover-color;
+    text-decoration: none;
+  }
+
+  .auth{
+    float: right;
+    padding-top: 20px;
+  }
+}

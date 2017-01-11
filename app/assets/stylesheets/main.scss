@@ -1,7 +1,15 @@
+@import 'variables';
 @import 'bootstrap';
-@import 'html_helper';
+@import 'farm_shed/all';
 @import 'menus';
+@import 'parts';
 
 body{
   padding-top: 50px;
+}
+
+.section_seperator{
+  // border-top: 1px double $main_contrast;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }

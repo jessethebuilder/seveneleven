@@ -9,58 +9,7 @@
 
   <%= page_header "International Stores" %>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <table id="intl_store_table" class="table table-striped store_table">
-          <thead>
-            <th>Select</th>
-
-            <% INTL_HEADERS.each do |h| %>
-              <th>
-                <%= link_to h.to_s.titlecase, '#', data: {order_by: h.to_s} %>
-              </th>
-            <% end %>
-            <th></th>
-            <th></th>
-            <% if user_is_admin? %>
-             <th></th>
-            <% end %>
-          </thead>
-
-          <tbody>
-            <% @intl_stores.each do |s| %>
-              <tr>
-                <td><%= check_box_tag s.id, s.id, is_in_current_store_list?(s), class: 'store_select' %></td>
-
-                <% INTL_HEADERS.each do |h| %>
-                  <td>
-                    <%= s.send(h) %>
-                  </td>
-                <% end %>
-
-                <td>
-                  <%= link_to "View", intl_store_path(s), class: 'btn btn-default btn-sm',
-                              target: '_blank' %>
-                </td>
-                <td>
-                  <%= link_to "Edit", edit_intl_store_path(s), class: 'btn btn-warning btn-sm',
-                              target: '_blank' %>
-                </td>
-                <% if user_is_admin? %>
-                  <td>
-                    <%= link_to "Destroy", intl_store_path(s), method: :delete,
-                                class: 'btn btn-danger btn-sm',
-                                data: {confirm: "Are you sure? This is peranent!"} %>
-                  </td>
-                <% end %>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+  <%= render partial: 'intl_stores/table', locals: {intl_stores: @intl_stores} %>
 </div>
 
 <script>
