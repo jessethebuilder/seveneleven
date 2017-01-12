@@ -6,7 +6,7 @@ class IntlStoresController < ApplicationController
   # GET /intl_stores
   # GET /intl_stores.json
   def index
-    order_by = params[:order_by] || "location"
+    order_by = params[:order_by] || "country"
     order_direction = params[:order_direction] || 'asc'
     filter_bys = params[:filter_bys]
     filter_terms = params[:filter_terms]

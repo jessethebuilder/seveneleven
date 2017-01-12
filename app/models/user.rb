@@ -28,7 +28,7 @@ class User
 
   has_many :store_lists
 
-  has_one :current_store_list, class_name: 'StoreList', inverse_of: :user
+  # has_one :current_store_list, class_name: 'StoreList', inverse_of: :user
 
   ## Confirmable
   # field :confirmation_token,   type: String

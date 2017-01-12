@@ -52,10 +52,11 @@ public
   # GET /store_lists
   # GET /store_lists.json
   def index
-    if user_is_admin?
-      @store_lists = StoreList.where(published: true).order(:user_id)
+    if params[:show_all] && user_is_admin?
+      @show_all = true
+      @store_lists = StoreList.published.order(:user_id => :asc)
     else
-      @store_lists = current_user.store_lists.where(published: true)
+      @store_lists = current_user.store_lists.published
     end
   end
 
@@ -69,18 +70,19 @@ public
   end
 
   def edit
+    if params[:save_current_as_draft]
+      current_user.store_lists.unpublished.each do |u|
+        u.update(published: true)
+        u.update(name: 'draft') unless u.name
+      end
+
+      @store_list.update(published: false)
+    end
   end
 
   def update
     respond_to do |format|
       if @store_list.update(store_list_params)
-        u = current_user
-        csl = u.current_store_list.dup
-        u.current_store_list.remove
-        u.store_lists << csl
-        u.current_store_list = StoreList.new 
-        u.save!
-
         format.html { redirect_to store_lists_url, notice: "#{@store_list.name} was Published." }
         # format.json { render :show, status: :ok, location: @store_list }
       else

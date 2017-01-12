@@ -11,13 +11,13 @@ module UserHelper
 
   def current_store_list
     if user_signed_in?
-      current_user.current_store_list || build_current_store_list
+      current_user.store_lists.unpublished.first || build_current_store_list
     end
   end
 
   def build_current_store_list
-    current_user.current_store_list = StoreList.new
+    current_user.store_lists << StoreList.new
     current_user.save!
-    current_user.current_store_list
+    current_user.store_lists.last
   end
 end
