@@ -3,8 +3,10 @@ class IntlStore
 
   has_and_belongs_to_many :store_lists
 
+  int_types = [:founded, :stores]
   INTL_HEADERS.each do |f|
-    field f, type: String
+    type = int_types.include?(f) ? Integer : String
+    field f, type: type
   end
 
   field :store_image

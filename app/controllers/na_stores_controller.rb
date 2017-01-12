@@ -15,10 +15,6 @@ class NaStoresController < ApplicationController
       bys = filter_bys.split(',')
       # .inject(''){ |n, s| s += "#{n} = ?"}
       terms = filter_terms.split(',')
-
-      puts bys
-      puts '--------------------------------------------------------'
-
       na_stores = NaStore.where(bys[0] => /#{terms[0]}/i)
 
       bys.each_with_index do |b, i|

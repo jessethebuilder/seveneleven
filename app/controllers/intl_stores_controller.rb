@@ -6,9 +6,29 @@ class IntlStoresController < ApplicationController
   # GET /intl_stores
   # GET /intl_stores.json
   def index
-    @order_by = params[:order_by] || "country"
-    @order_direction = params[:order_direction] || 'asc'
-    @intl_stores = IntlStore.all.order(@order_by => @order_direction)
+    order_by = params[:order_by] || "location"
+    order_direction = params[:order_direction] || 'asc'
+    filter_bys = params[:filter_bys]
+    filter_terms = params[:filter_terms]
+
+    if(filter_bys && filter_terms)
+      bys = filter_bys.split(',')
+      # .inject(''){ |n, s| s += "#{n} = ?"}
+      terms = filter_terms.split(',')
+      intl_stores = IntlStore.where(bys[0] => /#{terms[0]}/i)
+
+      bys.each_with_index do |b, i|
+        unless i == 0
+          intl_stores = intl_stores.where(b => /#{terms[i]}/i)
+        end
+      end
+
+      @intl_stores =  intl_stores.order(order_by => order_direction).page(params[:page]).per(100)
+    else
+      @intl_stores = IntlStore.all.
+                          order(order_by => order_direction).
+                          page(params[:page]).per(100)
+    end
   end
 
   # GET /intl_stores/1

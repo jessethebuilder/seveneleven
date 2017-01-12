@@ -7,7 +7,15 @@
 
           <% INTL_HEADERS.each do |h| %>
             <th>
-              <%= link_to h.to_s.titlecase, '#', data: {order_by: h.to_s} %>
+              <% if [:country, :founded, :stores, :first_location].include?(h) %>
+                <% if [:country, :first_location].include?(h) %>
+                  <%= link_to h.to_s.titlecase, '#', data: {order_by: h, filter_by: h} %>
+                <% else %>
+                  <%= link_to h.to_s.titlecase, '#', data: {order_by: h} %>
+                <% end %>
+              <% else %>
+                <%= h.to_s.titlecase %>
+              <% end %>
             </th>
           <% end %>
           <th></th>

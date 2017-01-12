@@ -5,8 +5,10 @@ class NaStore
 
   attr_accessor :store_image_cache, :remote_store_image_url
 
+  int_types = [:location]
   NA_HEADERS.each do |f|
-    field f, type: String
+    type = int_types.include?(f) ? Integer : String
+    field f, type: type
   end
 
   field :store_image

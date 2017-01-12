@@ -46,13 +46,15 @@ function activateSortByLinks(){
   for(var i = 0; i < headers.length; i++){
     var h = $(headers[i]);
     var order_by = h.data('order-by');
-    h.attr('href', path + '?order_by=' + order_by);
+    var url = path + '?order_by=' + order_by
+    if(filter_bys){
+      url = url + "&filter_bys=" + filter_bys + "&filter_terms=" + filter_terms;
+    }
+
+    h.attr('href', url);
 
     if(order_by === selected){
       var url = h.attr('href') + '&order_direction=' + next_direction;
-      if(filter_bys){
-        url = url + "&filter_bys=" + filter_bys + "&filter_terms=" + filter_terms;
-      }
       h.attr('href', url);
       h.addClass('selected');
       h.addClass(direction);
@@ -90,8 +92,9 @@ function activateFilterInputs(){
 
   for(var i = 0; i < inputs.length; i++){
     var input = $(inputs[i]);
-    input.on('change', function(){
-      if(this.value){
+    input.on('change', function(e){
+      // console.log(e);
+      // if(this.value){
 
         var loc = window.location;
         var order_by = query_object['order_by'];
@@ -107,11 +110,15 @@ function activateFilterInputs(){
           }
         }
         var path = loc.origin + loc.pathname + '?order_by=' + order_by +
-                   '&order_direction=' + order_direction + '&filter_bys=' +
-                   bys.join(',') + "&filter_terms=" + terms.join(',');
+                   '&order_direction=' + order_direction
+
+        if(bys.length > 0){
+          path = path + '&filter_bys=' +
+          bys.join(',') + "&filter_terms=" + terms.join(',');
+        }
 
         window.location = path;
-      }
+      // }
     });
   }
 }

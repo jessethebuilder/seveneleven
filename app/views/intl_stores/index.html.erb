@@ -13,8 +13,8 @@
 </div>
 
 <script>
-  $(document).ready(function(){
-    activateTableMenu('#intl_store_table', '<%= @order_by %>', '<%= @order_direction %>');
-    updateCurrentStoreListOnCheck('intl');
-  });
+$(document).ready(function(){
+  activateTable('#intl_store_table', 'country', 'asc');
+  updateCurrentStoreListOnCheck('intl');
+});
 </script>

@@ -7,6 +7,10 @@ Rails.application.routes.draw do
       post 'remove_from_current'
     end
   end
+
+  get 'users/sign_up', to: 'na_stores#index'
+  post '/users(:format)', to: 'users#create'
+  
   devise_for :users
   resources :users
 

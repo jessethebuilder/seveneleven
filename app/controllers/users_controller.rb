@@ -14,6 +14,11 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def sign_up
+    afd
+    redirect_to '/'
+  end
+
   # GET /users/1/edit
   def edit
   end
