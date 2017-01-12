@@ -11,8 +11,40 @@
     text-decoration: none;
   }
 
-  .auth{
+  .footer_menu{
     float: right;
-    padding-top: 20px;
+    // padding-top: 20px;
+    list-style: none;
+    padding-left: none;
+
+    li{
+      margin-top: 20px; 
+    }
+
+
+  }
+}
+
+.pagination_box{
+  text-align: center;
+
+  font-size: 16pt;
+
+  a{
+    color: $main_contrast;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  a:hover{
+    text-decoration: none;
+    // background-color: $main_contrast;
+    color: $light_contrast;
+    cursor: pointer;
+
+  }
+
+  .current{
+    color: $light_contrast;
   }
 }

@@ -1,28 +1,31 @@
 class UsersController < ApplicationController
-  before_action :set_intl_store, only: [:show, :edit, :update, :destroy]
-  before_action :authenticte_admin!
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!
 
   def index
     @users = User.all
   end
 
-  # GET /intl_stores/new
+  def show
+    render :edit
+  end
+  # GET /users/new
   def new
     @user = User.new
   end
 
-  # GET /intl_stores/1/edit
+  # GET /users/1/edit
   def edit
   end
 
-  # POST /intl_stores
-  # POST /intl_stores.json
+  # POST /users
+  # POST /users.json
   def create
-    @user = User.new(intl_store_params)
+    @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'Intl store was successfully created.' }
+        format.html { redirect_to users_url, notice: "#{@user.email} was created." }
       else
         format.html { render :new }
       end
@@ -31,8 +34,8 @@ class UsersController < ApplicationController
 
   def update
     respond_to do |format|
-      if @user.update(intl_store_params)
-        format.html { redirect_to @user, notice: 'Intl store was successfully updated.' }
+      if @user.update(user_params)
+        format.html { redirect_to users_url, notice: "#{@user.email} was updated." }
       else
         format.html { render :edit }
       end
@@ -42,7 +45,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to intl_stores_url, notice: 'Intl store was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: "#{@user.email} was deleted" }
     end
   end
 

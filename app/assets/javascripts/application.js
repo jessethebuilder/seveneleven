@@ -3,4 +3,4 @@
 //= require jquery_ujs
 //= require farm_shed/all
 //= require turbolinks
-//= require menus
+//= require tables

@@ -6,9 +6,33 @@ class NaStoresController < ApplicationController
   # GET /na_stores
   # GET /na_stores.json
   def index
-    @order_by = params[:order_by] || "location"
-    @order_direction = params[:order_direction] || 'asc'
-    @na_stores = NaStore.all.order(@order_by => @order_direction)
+    order_by = params[:order_by] || "location"
+    order_direction = params[:order_direction] || 'asc'
+    filter_bys = params[:filter_bys]
+    filter_terms = params[:filter_terms]
+
+    if(filter_bys && filter_terms)
+      bys = filter_bys.split(',')
+      # .inject(''){ |n, s| s += "#{n} = ?"}
+      terms = filter_terms.split(',')
+
+      puts bys
+      puts '--------------------------------------------------------'
+
+      na_stores = NaStore.where(bys[0] => /#{terms[0]}/i)
+
+      bys.each_with_index do |b, i|
+        unless i == 0
+          na_stores = na_stores.where(b => /#{terms[i]}/i)
+        end
+      end
+
+      @na_stores =  na_stores.order(order_by => order_direction).page(params[:page]).per(100)
+    else
+      @na_stores = NaStore.all.
+                          order(order_by => order_direction).
+                          page(params[:page]).per(100)
+    end
   end
 
   # GET /na_stores/1

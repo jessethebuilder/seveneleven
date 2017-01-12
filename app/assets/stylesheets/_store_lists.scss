@@ -1,15 +1,15 @@
 #edit_store_list{
   th{
-  a{
-    color: #333333;
+    a{
+      color: #333333;
 
+    }
+    a:hover{
+      text-decoration: none;
+      cursor: default;
+    }
+    a:active{
+      text-decoration: none;
+    }
   }
-  a:hover{
-    text-decoration: none;
-    cursor: default;
-  }
-  a:active{
-    text-decoration: none;
-  }
-}
 }

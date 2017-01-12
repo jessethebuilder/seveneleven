@@ -1,0 +1,45 @@
+<div id="users">
+  <%= page_header "Users" %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <%= quick_options ['New', new_user_path] %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <table class="table table-striped">
+          <thead>
+            <th>Email</th>
+            <th>Admin?</th>
+            <th>List Count</th>
+            <th></th>
+            <th></th>
+          </thead>
+
+          <tbody>
+            <% @users.each do |u| %>
+              <tr>
+                <td><%= mail_to u.email %></td>
+                <td><%= u.admin ? 'true' : 'false' %></td>
+                <td><%= u.store_lists.count %></td>
+                <td>
+                  <%= link_to 'Edit', edit_user_path(u), class: 'btn btn-warning btn-sm' %>
+                </td>
+                <td>
+                  <%= link_to 'Delete', user_path(u), method: :delete,
+                              class: 'btn btn-danger btn-sm',
+                              data: {confirm: 'Are you sure? This is permanent!'} %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

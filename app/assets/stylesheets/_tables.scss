@@ -1,0 +1,21 @@
+.store_table{
+  font-size: 10pt;
+
+  th{
+    a{
+      white-space:nowrap;
+    }
+  }
+
+  .filter_by_input{
+    margin-bottom: 10px;
+  }
+
+  .filter_term_clearer_box{
+    margin-bottom: 15px;
+
+    .filter_term_clearer{
+      font-size: 11pt;
+    }
+  }
+}

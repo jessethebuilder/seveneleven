@@ -1,0 +1,38 @@
+<%= form_for @user do |f| %>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <%= error_explanation @user %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4"></div>
+      <div class="col-sm-4">
+        <div class="form-group">
+          <%= f.label :email, class: 'control-label' %>
+          <%= f.email_field :email, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password, class: 'control-label' %>
+          <%= f.password_field :password, class: 'form-control', autocomplete: false %>
+        </div>
+
+        <div class="form-group">
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :admin %>
+              Admin?
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.submit class: 'btn btn-primary' %>
+        </div>
+      </div>
+      <div class="col-sm-4"></div>
+    </div>
+  </div>
+<% end %>

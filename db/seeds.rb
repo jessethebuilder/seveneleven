@@ -37,7 +37,7 @@ CSV.foreach(Rails.root.join('data/na.csv')) do |row|
 
     first = false
     counter += 1
-    break if counter == 100
+    # break if counter == 100
 end
 
 puts "na complete"

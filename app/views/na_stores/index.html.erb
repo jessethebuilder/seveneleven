@@ -11,12 +11,15 @@
 
   <%= render partial: 'table', locals: {na_stores: @na_stores} %>
 
+  <%= render partial: 'parts/pagination', locals: {collection: @na_stores} %>
 </div>
 
 <script>
 
+
+
   $(document).ready(function(){
-    activateTableMenu('#na_store_table', '<%= @order_by %>', '<%= @order_direction %>');
-    updateCurrentStoreListOnCheck('na');  
+    activateTable('#na_store_table', 'location', 'asc');
+    updateCurrentStoreListOnCheck('na');
   });
 </script>

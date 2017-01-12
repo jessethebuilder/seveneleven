@@ -28,13 +28,15 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 #Added Gems-------------------------------------
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '3.0.3.0'
 gem 'fog'
 gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'mini_magick'
 gem 'devise'
-# gem 'activerecord'
+# gem 'kaminari'
+gem 'kaminari-mongoid'
+gem 'kaminari-actionview'
 
 # Anysoft Gems
 gem 'farm_shed', git: 'https://github.com/jessethebuilder/farm_shed', branch: 'lite'
