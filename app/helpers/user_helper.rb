@@ -16,7 +16,7 @@ module UserHelper
       begin
         Playlist.find(id)
       rescue
-        deactivate_playlist_edit_mode
+        session[:current_playlist_id] = false
       end
     else
       nil
@@ -37,10 +37,14 @@ module UserHelper
 
   def activate_playlist_edit_mode(playlist)
     session[:current_playlist_id] = playlist.id
+    playlist = session_playlist
+    playlist.update(:published, false) if playlist
   end
 
   def deactivate_playlist_edit_mode
     session[:current_playlist_id] = nil
+    playlist = session_playlist
+    playlist.update(:published, true) if playlist
   end
 
   def in_playlist_edit_mode?
