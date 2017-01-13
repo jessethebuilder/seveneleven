@@ -1,16 +1,15 @@
-class StoreList
+class Playlist
   include Mongoid::Document
 
-  belongs_to :user, inverse_of: :store_list
-
-  # , inverse_of: :store_list
-  # belongs_to :user, inverse_of: :current_store_list
+  belongs_to :user, inverse_of: :playlist
 
   has_and_belongs_to_many :na_stores
   has_and_belongs_to_many :intl_stores
 
   field :name, type: String
   field :published, type: Boolean, default: false
+
+  field :user_to_return_to_on_publish, type: Integer
 
   validate :name_if_published
 
@@ -22,11 +21,11 @@ class StoreList
     end
   end
 
-  def StoreList.published
+  def Playlist.published
     where(:published => true)
   end
 
-  def StoreList.unpublished
+  def Playlist.unpublished
     where(published: false)
   end
 end

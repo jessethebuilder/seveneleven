@@ -23,7 +23,7 @@ class NaStoresController < ApplicationController
         end
       end
 
-      @na_stores =  na_stores.order(order_by => order_direction).page(params[:page]).per(100)
+      @na_stores =  na_stores.order(order_by => order_direction).page(params[:page]).per(50)
     else
       @na_stores = NaStore.all.
                           order(order_by => order_direction).

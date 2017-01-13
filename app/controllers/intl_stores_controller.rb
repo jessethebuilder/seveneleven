@@ -23,7 +23,7 @@ class IntlStoresController < ApplicationController
         end
       end
 
-      @intl_stores =  intl_stores.order(order_by => order_direction).page(params[:page]).per(100)
+      @intl_stores =  intl_stores.order(order_by => order_direction).page(params[:page]).per(50)
     else
       @intl_stores = IntlStore.all.
                           order(order_by => order_direction).

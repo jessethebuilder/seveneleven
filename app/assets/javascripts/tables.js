@@ -27,7 +27,7 @@ function activateFilterTerms(){
   buildFilterInputs(headers, query_object);
   activateFilterInputs(headers, query_object);
   activateFilterTermClearer();
-
+  selectAllOnSelectAll(table);
 }
 
 function activateSortByLinks(){
@@ -154,9 +154,48 @@ function clearFilterTerms(){
   window.location = path;
 }
 
-//------------------- Update Store List --------------------------------
+//------------- Select All -----------------------------------
 
-function updateCurrentStoreListOnCheck(store_type){
+
+function selectAllOnSelectAll(table){
+  var select_all = table.find('.select_all_stores');
+  setSelectAll(select_all);
+
+  select_all.on('change', function(){
+    var selects = table.find('.store_select');
+    var bool_select;
+
+    if(this.checked){
+      bool_select = true;
+    } else {
+      bool_select = false;
+    }
+
+    for(var i = 0; i < selects.length;  i++){
+      var select = $(selects[i]);
+      if(select.prop('checked') != bool_select){
+        select.prop('checked', bool_select);
+        select.trigger('change');
+      }
+    }
+  });
+}
+
+function setSelectAll(select_all){
+  var selects = $('.store_select');
+  for(var i = 0; i < selects.length; i++){
+    if(!selects[i].checked){
+      select_all.prop('checked', false);
+      return false;
+    }
+  }
+  select_all.prop('checked', true);
+  return true;
+}
+
+//------------------- Update Playlist --------------------------------
+
+function updateCurrentPlaylistOnCheck(store_type){
   // store_type used for routing AJAX request
   var selects = $('#' + store_type + '_store_table').find('.store_select');
 
@@ -166,12 +205,12 @@ function updateCurrentStoreListOnCheck(store_type){
 
       $.ajax({
           method: 'POST',
-          url: '/store_lists/add_to_current?store_type=' + store_type + '&store_id=' + this.id
+          url: '/playlists/add_to_current?store_type=' + store_type + '&store_id=' + this.id
         });
       } else {
         $.ajax({
           method: 'POST',
-          url: '/store_lists/remove_from_current?store_type=' + store_type + '&store_id=' + this.id
+          url: '/playlists/remove_from_current?store_type=' + store_type + '&store_id=' + this.id
         });
       }
     });

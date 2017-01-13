@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Seveneleven</title>
+    <title>7-Eleven Lobby Wall</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -11,7 +11,9 @@
   <body>
     <%= render partial: 'parts/top_nav' %>
     <%= render partial: 'parts/flash' %>
-    <%= yield %>
+    <div id="main_content">
+      <%= yield %>
+    </div>
     <%= render partial: 'parts/footer' %>
   </body>
 </html>

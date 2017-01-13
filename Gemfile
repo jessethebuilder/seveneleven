@@ -42,11 +42,6 @@ gem 'kaminari-actionview'
 gem 'farm_shed', git: 'https://github.com/jessethebuilder/farm_shed', branch: 'lite'
 gem 'farm_ruby', git: 'https://github.com/jessethebuilder/farm_ruby'
 
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
-end
-
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
@@ -54,6 +49,29 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test, :development do
+  gem 'rspec-rails'
+  # gem 'wdm'
+  gem 'byebug', platform: :mri
+  gem 'database_cleaner'
+  # , '~> 1.0.0rc'
+  gem 'timecop'
+  gem 'faker'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'selenium-webdriver'
+  gem 'shoulda'
+  gem 'launchy'
+  # , '~> 2.4.0'
+  # gem 'phantomjs', :require => 'phantomjs/poltergeist'
+  gem 'poltergeist'
+  #gem 'webrat'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
       </button>
       <%= link_to root_path , :class => 'navbar-brand' do %>
-      	7-11 Stores
+      	<%= image_tag 'nav_banner.png' %>
       <% end %>
     </div>
 
@@ -21,15 +21,16 @@
             <%= link_to "International", intl_stores_path %>
           </li>
           <li>
-            <%= link_to "Store Lists", store_lists_path %>
+            <%= link_to "Playlists", playlists_path %>
           </li>
 
-          <% if current_store_list %>
+          <% if current_playlist %>
             <li>
-              <%= link_to edit_store_list_path(current_store_list) do %>
-                Current List:
-                <span id="current_store_list_box">
-                  <%= render partial: 'store_lists/current_store_list' %>
+              <%= link_to edit_playlist_path(current_playlist),
+                          class: 'current_playlist_link' do %>
+                Current Playlist:
+                <span id="current_playlist_box">
+                  <%= render partial: 'playlists/current_playlist' %>
                 </span>
               <% end %>
             </li>

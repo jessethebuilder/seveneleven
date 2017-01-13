@@ -3,7 +3,12 @@
     <div class="col-xs-12">
       <table id="intl_store_table" class="table table-striped store_table">
         <thead>
-          <th>Select</th>
+          <th>
+            <div class="checkbox">
+              <%= check_box_tag :select_all_stores, 'no', false, class: 'select_all_stores' %>
+            </div>
+            Select
+          </th>
 
           <% INTL_HEADERS.each do |h| %>
             <th>
@@ -28,7 +33,7 @@
         <tbody>
           <% intl_stores.each do |s| %>
             <tr>
-              <td><%= check_box_tag s.id, s.id, is_in_current_store_list?(s), class: 'store_select' %></td>
+              <td><%= check_box_tag s.id, s.id, is_in_current_playlist?(s), class: 'store_select' %></td>
 
               <% INTL_HEADERS.each do |h| %>
                 <td>

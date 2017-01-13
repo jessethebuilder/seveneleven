@@ -1,0 +1,79 @@
+<div id="playlists">
+
+  <% if user_is_admin? %>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <% if @show_all %>
+            <%= quick_options ["Show Mine", playlists_path(:show_mine => 'true')] %>
+          <% else %>
+            <%= quick_options ['Show All', playlists_path] %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <%= page_header "Playlists" %>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <table class="table table-striped">
+          <thead>
+            <th>Name</th>
+            <th>User</th>
+            <th>North America Count</th>
+            <th>International Count</th>
+            <th><th>
+            <th></th>
+            <th></th>
+          </thead>
+
+          <tbody>
+            <% if @waiting_playlist %>
+              <tr>
+                <td><%= @waiting_playlist.name || 'current draft' %></td>
+                <td></td>
+                <td><%= @waiting_playlist.na_stores.count %></td>
+                <td><%= @waiting_playlist.intl_stores.count %></td>
+                <td>
+                  <%= link_to "Edit", edit_playlist_path(@waiting_playlist, skip_flash: true),
+                              class: 'btn btn-default btn-warning edit_playlist_link' %>
+                </td>
+                <td>
+                  <%= link_to "Delete", playlist_path(@waiting_playlist), method: :delete,
+                              class: 'btn btn-danger btn-sm',
+                              data: {confirm: "Are you sure?"} %>
+                </td>
+              </tr>
+            <% end %>
+
+            <% @playlists.each do |sl| %>
+              <tr>
+                <td><%= sl.name %></td>
+
+                <td>
+                  <%= mail_to sl.user.email %>
+                </td>
+                <td><%= sl.na_stores.count %></td>
+                <td><%= sl.intl_stores.count %></td>
+                <td><%= link_to 'GO LIVE!', "javascript:alert('go live!!!!!!!!!');",
+                        class: 'btn btn-primary btn-sm' %>
+                <td>
+                  <%= link_to "Edit", edit_playlist_path(sl),
+                              class: 'btn btn-default btn-warning edit_playlist_link' %>
+                </td>
+                <td>
+                  <%= link_to "Delete", playlist_path(sl), method: :delete,
+                              class: 'btn btn-danger btn-sm',
+                              data: {confirm: "Are you sure?"} %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

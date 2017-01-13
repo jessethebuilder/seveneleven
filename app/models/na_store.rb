@@ -1,7 +1,7 @@
 class NaStore
   include Mongoid::Document
 
-  has_and_belongs_to_many :store_lists
+  has_and_belongs_to_many :playlists
 
   attr_accessor :store_image_cache, :remote_store_image_url
 

@@ -26,9 +26,9 @@ class User
 
   field :admin, type: Boolean
 
-  has_many :store_lists
+  has_many :playlists
 
-  # has_one :current_store_list, class_name: 'StoreList', inverse_of: :user
+  # has_one :current_playlist, class_name: 'Playlist', inverse_of: :user
 
   ## Confirmable
   # field :confirmation_token,   type: String

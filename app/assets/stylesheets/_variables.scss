@@ -1,2 +1,13 @@
-$main_contrast: black;
+$main_contrast: #222;
 $light_contrast: #999999;
+
+$light_color: white;
+
+$brand-warning: #F37721;
+$brand-danger: #ED2525;
+$brand-primary: #008062;
+
+$navbar-inverse-bg: $brand-primary;
+$navbar-inverse-border: $brand-danger;
+$navbar-inverse-link-color: $light_color;
+$navbar-inverse-link-hover-color: $light_contrast;

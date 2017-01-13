@@ -3,10 +3,16 @@
 @import 'farm_shed/all';
 @import 'parts';
 @import 'tables';
-@import 'store_lists';
+@import 'playlists';
 
 body{
-  padding-top: 50px;
+  padding-top: 55px;
+  background-color: $main_contrast;
+}
+
+#main_content{
+  background-color: white;
+  padding-bottom: 50px;
 }
 
 .section_seperator{

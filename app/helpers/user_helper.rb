@@ -9,15 +9,41 @@ module UserHelper
     user_signed_in? && current_user.admin?
   end
 
-  def current_store_list
-    if user_signed_in?
-      current_user.store_lists.unpublished.first || build_current_store_list
+  def session_playlist
+    id = session[:current_playlist_id]
+
+    if id
+      begin
+        Playlist.find(id)
+      rescue
+        deactivate_playlist_edit_mode
+      end
+    else
+      nil
     end
   end
 
-  def build_current_store_list
-    current_user.store_lists << StoreList.new
+  def current_playlist
+    if user_signed_in?
+      session_playlist || current_user.playlists.unpublished.first || build_current_playlist
+    end
+  end
+
+  def build_current_playlist
+    current_user.playlists << Playlist.new
     current_user.save!
-    current_user.store_lists.last
+    current_user.playlists.last
+  end
+
+  def activate_playlist_edit_mode(playlist)
+    session[:current_playlist_id] = playlist.id
+  end
+
+  def deactivate_playlist_edit_mode
+    session[:current_playlist_id] = nil
+  end
+
+  def in_playlist_edit_mode?
+    session[:current_playlist_id] ? true : false
   end
 end

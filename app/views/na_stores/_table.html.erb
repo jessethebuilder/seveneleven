@@ -3,14 +3,21 @@
     <div class="col-xs-12">
       <table id="na_store_table" class="table table-striped store_table">
         <thead>
-          <th>Select</th>
           <th>
-            <%= link_to 'Location', "#", data: {order_by: 'location'} %>
+            <div class="checkbox">
+              <%= check_box_tag :select_all_stores, 'no', false, class: 'select_all_stores' %>
+            </div>
+            Select
+          </th>
+          <th>
+            <%= link_to 'Location', "#", data: {order_by: 'location', filter_by: 'location'} %>
           </th>
           <th>
             <%= link_to 'Franchisee', '#', data: {order_by: 'fz_name', filter_by: 'fz_name'} %>
           </th>
-          <th>Address</th>
+          <th>
+            <%= link_to 'Address', '#', data: {order_by: 'address', filter_by: 'address'} %>
+          </th>
           <th>
             <%= link_to 'City', '#', data: {order_by: 'city', filter_by: 'city'} %>
           </th>
@@ -18,8 +25,7 @@
             <%= link_to 'St', '#', data: {order_by: 'state_or_province', filter_by: "state_or_province"} %>
           </th>
           <!-- <th>Postal Code</th> -->
-          <th>Country</th>
-          <th>Phone</th>
+          <th><%= link_to 'Country', '#', data: {order_by: 'country', filter_by: 'country'} %></th>
           <th></th>
           <th></th>
           <% if user_is_admin? %>
@@ -30,7 +36,7 @@
         <tbody>
           <% na_stores.each do |s| %>
             <tr>
-              <td><%= check_box_tag s.id, s.id, is_in_current_store_list?(s), class: 'store_select' %></td>
+              <td><%= check_box_tag s.id, s.id, is_in_current_playlist?(s), class: 'store_select' %></td>
               <td><%= s.location %></td>
               <td><%= s.fz_name %></td>
               <td><%= s.address %></td>
@@ -38,9 +44,6 @@
               <td><%= s.state_or_province %></td>
               <!-- <td><%= s.postal_code %></td> -->
               <td><%= s.country %></td>
-              <td>
-                <%= link_to s.phone_number, "tel:#{s.phone_number}" %>
-              </td>
               <td>
                 <%= link_to "View", na_store_path(s), class: 'btn btn-default btn-sm',
                             target: '_blank' %>

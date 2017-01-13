@@ -1,19 +1,20 @@
 Rails.application.routes.draw do
   resources :na_stores
   resources :intl_stores
-  resources :store_lists, except: [:new, :create] do
+  resources :playlists, except: [:new, :create] do
     collection do
       post 'add_to_current'
       post 'remove_from_current'
     end
   end
 
-  get 'users/sign_up', to: 'na_stores#index'
+  get 'users/sign_up', to: 'playlists#index'
+  #force the following route through users, beause it is protected by auth
   post '/users(:format)', to: 'users#create'
-  
+
   devise_for :users
   resources :users
 
-  root to: 'na_stores#index'
+  root to: 'playlists#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

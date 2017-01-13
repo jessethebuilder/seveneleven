@@ -1,5 +1,23 @@
+#top_nav{
+  .navbar-brand{
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    img{
+      height: 50px;
+    }
+  }
+
+  .navbar-right{
+    margin-top: 7px;  
+    // padding-bottom:
+    font-size: 20px;
+  }
+}
+
 #footer{
   padding-bottom: 40px;
+
   background-color: $main_contrast;
 
   a{
@@ -12,16 +30,14 @@
   }
 
   .footer_menu{
-    float: right;
+    // float: right;
     // padding-top: 20px;
     list-style: none;
     padding-left: none;
 
     li{
-      margin-top: 20px; 
     }
-
-
+      margin-top: 20px;
   }
 }
 
@@ -46,5 +62,16 @@
 
   .current{
     color: $light_contrast;
+  }
+}
+
+.flash{
+  background-color: #cccccc;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  h4{
+    font-size: 20pt;
   }
 }

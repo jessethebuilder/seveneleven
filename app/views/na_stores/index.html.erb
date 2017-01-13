@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <%= quick_options ["New", new_na_store_path] %>
+        <%= quick_options ["Add Store", new_na_store_path] %>
       </div>
     </div>
   </div>
@@ -20,6 +20,6 @@
 
   $(document).ready(function(){
     activateTable('#na_store_table', 'location', 'asc');
-    updateCurrentStoreListOnCheck('na');
+    updateCurrentPlaylistOnCheck('na');
   });
 </script>

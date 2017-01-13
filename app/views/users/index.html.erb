@@ -26,7 +26,7 @@
               <tr>
                 <td><%= mail_to u.email %></td>
                 <td><%= u.admin ? 'true' : 'false' %></td>
-                <td><%= u.store_lists.published.count %></td>
+                <td><%= u.playlists.published.count %></td>
                 <td>
                   <%= link_to 'Edit', edit_user_path(u), class: 'btn btn-warning btn-sm' %>
                 </td>

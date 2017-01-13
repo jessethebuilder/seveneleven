@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <%= quick_options ["New", new_intl_store_path] %>
+        <%= quick_options ["Add Store", new_intl_store_path] %>
       </div>
     </div>
   </div>
@@ -13,8 +13,11 @@
 </div>
 
 <script>
+
+
+
 $(document).ready(function(){
   activateTable('#intl_store_table', 'country', 'asc');
-  updateCurrentStoreListOnCheck('intl');
+  updateCurrentPlaylistOnCheck('intl');
 });
 </script>

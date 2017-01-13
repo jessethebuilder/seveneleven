@@ -1,7 +1,7 @@
 class IntlStore
   include Mongoid::Document
 
-  has_and_belongs_to_many :store_lists
+  has_and_belongs_to_many :playlists
 
   int_types = [:founded, :stores]
   INTL_HEADERS.each do |f|
