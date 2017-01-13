@@ -27,7 +27,7 @@ class IntlStoresController < ApplicationController
     else
       @intl_stores = IntlStore.all.
                           order(order_by => order_direction).
-                          page(params[:page]).per(100)
+                          page(params[:page]).per(50)
     end
   end
 

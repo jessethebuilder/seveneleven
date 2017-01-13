@@ -20,6 +20,8 @@
 
   background-color: $main_contrast;
 
+  border-top: 1px solid $brand-danger;
+
   a{
     color: $navbar-inverse-link-color;
     text-transform:capitalize;

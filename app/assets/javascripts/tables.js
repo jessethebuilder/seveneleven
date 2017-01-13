@@ -195,22 +195,32 @@ function setSelectAll(select_all){
 
 //------------------- Update Playlist --------------------------------
 
+function enableSelectAll(){
+  // $('.select_all_stores').prop("disabled", false);
+}
+
+function disableSelectAll(){
+  // $('.select_all_stores').prop("disabled", true);
+}
+
 function updateCurrentPlaylistOnCheck(store_type){
   // store_type used for routing AJAX request
   var selects = $('#' + store_type + '_store_table').find('.store_select');
 
   for(var i = 0; i < selects.length; i++){
     $(selects[i]).change(function(){
+      disableSelectAll();
       if(this.checked){
-
-      $.ajax({
+        $.ajax({
           method: 'POST',
-          url: '/playlists/add_to_current?store_type=' + store_type + '&store_id=' + this.id
+          url: '/playlists/add_to_current?store_type=' + store_type + '&store_id=' + this.id,
+          complete: enableSelectAll()
         });
       } else {
         $.ajax({
           method: 'POST',
-          url: '/playlists/remove_from_current?store_type=' + store_type + '&store_id=' + this.id
+          url: '/playlists/remove_from_current?store_type=' + store_type + '&store_id=' + this.id,
+          complete: enableSelectAll()
         });
       }
     });

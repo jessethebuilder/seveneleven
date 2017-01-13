@@ -26,6 +26,8 @@
         <div class="col-xs-12">
           <div class="form-group">
             <%= f.submit 'Save', class: 'btn btn-primary' %>
+            <%= link_to 'Delete', @playlist, method: :delete, class: 'btn btn-danger',
+                        data: {confirm: "Are you sure? This is permanent!"} %>
           </div>
         </div>
       </div>
