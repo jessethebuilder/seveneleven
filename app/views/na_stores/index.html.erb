@@ -13,13 +13,3 @@
 
   <%= render partial: 'parts/pagination', locals: {collection: @na_stores} %>
 </div>
-
-<script>
-
-
-
-  $(document).ready(function(){
-    activateTable('#na_store_table', 'location', 'asc');
-    updateCurrentPlaylistOnCheck('na');
-  });
-</script>

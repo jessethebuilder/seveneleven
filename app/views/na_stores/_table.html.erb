@@ -66,3 +66,11 @@
     </div>
   </div>
 </div>
+
+
+<script>
+  $(document).on("turbolinks:load", function(){
+    activateTable('#na_store_table', 'location', 'asc');
+    updateCurrentPlaylistOnCheck('na');
+  });
+</script>

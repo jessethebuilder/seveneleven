@@ -1,0 +1,14 @@
+<%= page_header "North American Stores" %>
+
+<%= render partial: 'na_stores/table', locals: {na_stores: @na_stores} %>
+
+
+<%= page_header "International Stores" %>
+
+<%= render partial: 'intl_stores/table', locals: {intl_stores: @intl_stores} %>
+
+<script>
+  $(document).on('turbolinks:load', function(){
+    $('.filter_by_input').hide();
+  });
+</script>

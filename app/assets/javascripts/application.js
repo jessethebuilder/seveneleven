@@ -4,3 +4,17 @@
 //= require farm_shed/all
 //= require turbolinks
 //= require tables
+
+function initStoreSearch(){
+  // If a value is added to store_search input, redirect to store_search
+  $('#store_search').blur(function(e){
+    var val = $(this).val();
+    if(val.length > 0){
+      window.location = '/store_searches/' + val;
+    }
+  });
+}
+
+$(document).on("turbolinks:load", function(){
+  initStoreSearch();
+});
