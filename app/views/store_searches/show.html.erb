@@ -21,18 +21,20 @@
     updateCurrentPlaylistOnCheck('intl');
 
     $('.filter_by_input').hide();
-
+    $('.filter_term_clearer').hide();
     // Remove links
-    // var headers = $('th');
-    // for(var i = 0; i < headers.length; i++){
-    //   var header = $(headers[i]);
-    //   var link = header.find('a');
-    //   if(link.length > 0){
-    //     header.html(link.text());
-    //   }
-    //
-    //   // var text = header.link();
-    //
-    // }
+    var head_row = $('thead');
+    for(var i = 0; i  < head_row.length; i++){
+      var headers = $(head_row[i]).find('th');
+
+      for(var j = 1; j < headers.length; j++){
+        // skip first column, so start at 1
+        var header = $(headers[j]);
+        var link = header.find('a');
+        if(link.length > 0){
+          header.html(link.text());
+        }
+      }
+    }
   });
 </script>
