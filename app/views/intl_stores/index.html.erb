@@ -11,3 +11,15 @@
 
   <%= render partial: 'intl_stores/table', locals: {intl_stores: @intl_stores} %>
 </div>
+
+<script>
+// $(document).on("turbolinks:load", function(){
+//   activateTable('#intl_store_table', 'country', 'asc');
+//   updateCurrentPlaylistOnCheck('intl');
+// });
+
+$(document).ready(function(){
+  activateTable('#intl_store_table', 'country', 'asc');
+  updateCurrentPlaylistOnCheck('intl');
+});
+</script>

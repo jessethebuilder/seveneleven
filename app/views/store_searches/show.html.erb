@@ -12,3 +12,27 @@
     $('.filter_by_input').hide();
   });
 </script>
+
+<script>
+  $(document).on("turbolinks:load", function(){
+    activateTable('#na_store_table', 'location', 'asc');
+    updateCurrentPlaylistOnCheck('na');
+    activateTable('#intl_store_table', 'country', 'asc');
+    updateCurrentPlaylistOnCheck('intl');
+
+    $('.filter_by_input').hide();
+
+    // Remove links
+    // var headers = $('th');
+    // for(var i = 0; i < headers.length; i++){
+    //   var header = $(headers[i]);
+    //   var link = header.find('a');
+    //   if(link.length > 0){
+    //     header.html(link.text());
+    //   }
+    //
+    //   // var text = header.link();
+    //
+    // }
+  });
+</script>
