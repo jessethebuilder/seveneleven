@@ -18,3 +18,16 @@ function initStoreSearch(){
 $(document).on("turbolinks:load", function(){
   initStoreSearch();
 });
+
+function padForTopNav(){
+  var padding = $('#top_nav').height();
+  $('body').css('padding-top', padding + 'px');
+}
+
+$(document).on("turbolinks:load", function(){
+  padForTopNav();
+});
+
+$(window).resize(function(){
+  padForTopNav();
+});
