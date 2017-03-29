@@ -5,17 +5,35 @@
     </div>
   </div>
 
+
+  <div class="row">
+    <% NaStore.bool_types.each do |h| %>
+      <div class="col-sm-2">
+        <div class="form-group">
+          <div class="checkbox">
+            <label class="control-label">
+              <%= f.check_box h, class: 'form-control' %>&nbsp;
+              <%= h.to_s.titlecase %>
+            </label>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
   <% NA_HEADERS.in_groups_of(3) do |header_group| %>
     <div class="row">
       <% header_group.each do |h| %>
-        <div class="col-sm-4">
-          <% if h %>
-            <div class="form-group">
-              <%= f.label h, class: 'control-label' %>
-              <%= f.text_field h, class: 'form-control' %>
-            </div>
-          <% end %>
-        </div>
+        <% unless NaStore.bool_types.include?(h) %>
+          <div class="col-sm-4">
+            <% if h %>
+              <div class="form-group">
+                <%= f.label h, class: 'control-label' %>
+                <%= f.text_field h, class: 'form-control' %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
     </div>
   <% end %>

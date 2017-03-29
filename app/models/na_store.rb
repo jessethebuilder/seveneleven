@@ -5,9 +5,24 @@ class NaStore
 
   attr_accessor :store_image_cache, :remote_store_image_url
 
-  int_types = [:location]
+
+  def NaStore.bool_types
+    [:nblc_highlight, :nblc_member, :alcohol_flag, :liquor_flag, :gas_flag]
+  end
+
+  def NaStore.int_types
+    [:location]
+  end
+
   NA_HEADERS.each do |f|
-    type = int_types.include?(f) ? Integer : String
+    if NaStore.int_types.include?(f)
+      type = Integer
+    elsif NaStore.bool_types.include?(f)
+      type = Boolean
+    else
+      type = String
+    end
+
     field f, type: type
   end
 

@@ -1,6 +1,22 @@
 class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: [:show, :edit, :update, :destroy]
+  before_action :set_playlist, only: [:show, :edit, :update, :destroy, :go_live]
   before_action :authenticate_user!
+
+  def go_live
+    user = @playlist.user
+    user.playlists.all.each do |pl|
+      pl.update_attribute(:live, false) unless @playlist == pl
+    end
+
+    @playlist.update_attribute(:live, true)
+    @playlist.push_as_live
+
+    unless params[:show_mine]
+      redirect_to playlists_path
+    else
+      redirect_to playlists_path(show_mine: true)
+    end
+  end
 
   def add_to_current
     store_type = params[:store_type]

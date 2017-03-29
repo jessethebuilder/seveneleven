@@ -49,23 +49,28 @@
               </tr>
             <% end %>
 
-            <% @playlists.each do |sl| %>
+            <% @playlists.each do |pl| %>
               <tr>
-                <td><%= sl.name %></td>
+                <td><%= pl.name %></td>
 
                 <td>
-                  <%= mail_to sl.user.email %>
+                  <%= mail_to pl.user.email %>
                 </td>
-                <td><%= sl.na_stores.count %></td>
-                <td><%= sl.intl_stores.count %></td>
-                <td><%= link_to 'GO LIVE!', "javascript:alert('go live!!!!!!!!!');",
-                        class: 'btn btn-primary btn-sm' %>
+                <td><%= pl.na_stores.count %></td>
+                <td><%= pl.intl_stores.count %></td>
                 <td>
-                  <%= link_to "Edit", edit_playlist_path(sl),
+                  <% if pl.live == true %>
+                    <%= 'LIVE' %>
+                  <% else %>
+                    <%= link_to 'GO LIVE!', go_live_playlist_path(pl, show_mine: params[:show_mine]),
+                          class: 'btn btn-primary btn-sm' %>
+                  <% end %>
+                <td>
+                  <%= link_to "Edit", edit_playlist_path(pl),
                               class: 'btn btn-default btn-warning edit_playlist_link' %>
                 </td>
                 <td>
-                  <%= link_to "Delete", playlist_path(sl), method: :delete,
+                  <%= link_to "Delete", playlist_path(pl), method: :delete,
                               class: 'btn btn-danger btn-sm',
                               data: {confirm: "Are you sure?"} %>
                 </td>

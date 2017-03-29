@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   resources :na_stores
   resources :intl_stores
   resources :playlists, except: [:new, :create] do
+    member do
+      get 'go_live'
+    end
+
     collection do
       post 'add_to_current'
       post 'remove_from_current'

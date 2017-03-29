@@ -24,8 +24,22 @@
           <th>
             <%= link_to 'St', '#', data: {order_by: 'state_or_province', filter_by: "state_or_province"} %>
           </th>
+          <th>
+            <%= link_to 'Zip', '#', data: {order_by: 'postal_code', filter_by: 'postal_code' } %>
+          </th>
           <!-- <th>Postal Code</th> -->
-          <th><%= link_to 'Country', '#', data: {order_by: 'country', filter_by: 'country'} %></th>
+          <th>
+            <%= link_to 'Country', '#', data: {order_by: 'country', filter_by: 'country'} %>
+          </th>
+          <th>
+            <%= link_to 'NBLC Member', '#', data: {order_by: 'nblc_member'} %>
+          </th>
+          <th>
+            <%= link_to 'NBLC Highlight', '#', data: {order_by: 'nblc_highlight'} %>
+          </th>
+          <th>
+            <%= link_to 'Image', '#', data: {order_by: 'store_image'} %>
+          </th>
           <th></th>
           <th></th>
           <% if user_is_admin? %>
@@ -42,8 +56,13 @@
               <td><%= s.address %></td>
               <td><%= s.city %></td>
               <td><%= s.state_or_province %></td>
-              <!-- <td><%= s.postal_code %></td> -->
+              <td><%= s.postal_code %></td>
               <td><%= s.country %></td>
+              <td><%= s.nblc_member %></td>
+              <td><%= s.nblc_highlight %></td>
+              <td>
+                <%= image_tag s.store_image.url(:tiny_thumb) if s.store_image? %>
+              </td>
               <td>
                 <%= link_to "View", na_store_path(s), class: 'btn btn-default btn-sm',
                             target: '_blank' %>

@@ -94,6 +94,7 @@ class IntlStoresController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def intl_store_params
       params.require(:intl_store).permit(:country, :founded, :stores, :fun_fact, :video, :first_location,
-                                         :lat_long, :lat, :long, :pin_address_for_store_drop)
+                                         :lat_long, :lat, :long, :pin_address_for_store_drop,
+                                         :store_image, :remote_store_image_url, :store_image_cache)
     end
 end

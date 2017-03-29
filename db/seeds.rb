@@ -29,8 +29,19 @@ CSV.foreach(Rails.root.join('data/na.csv')) do |row|
     s = NaStore.new
     # r = row.split(', ')
     NA_HEADERS.each_with_index do |h, i|
-      s.send("#{h}=", row[i])
+      v = row[i]
+      if v && NaStore.bool_types.include?(h)
+        tst = v.downcase
+        if tst == 'y' || tst == 'yes'
+          v = true
+        else
+          v = false
+        end
+      end
+
+      s.send("#{h}=", v)
     end
+
     unless first
       s.save!
     end

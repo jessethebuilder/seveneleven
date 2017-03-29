@@ -1,9 +1,9 @@
-<%= page_header "North American Stores" %>
+<%= page_header "North American Stores <small>#{@na_stores.count} records</small>".html_safe %>
 
 <%= render partial: 'na_stores/table', locals: {na_stores: @na_stores} %>
 
 
-<%= page_header "International Stores" %>
+<%= page_header "International Stores <small>#{@intl_stores.count} records</small>".html_safe %>
 
 <%= render partial: 'intl_stores/table', locals: {intl_stores: @intl_stores} %>
 

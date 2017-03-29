@@ -23,6 +23,9 @@
               <% end %>
             </th>
           <% end %>
+          <th>
+            <%= link_to 'Image', '#', data: {order_by: 'store_image'} %>
+          </th>
           <th></th>
           <th></th>
           <% if user_is_admin? %>
@@ -40,7 +43,9 @@
                   <%= s.send(h) %>
                 </td>
               <% end %>
-
+              <td>
+                <%= image_tag s.store_image.url(:tiny_thumb) if s.store_image? %>
+              </td>
               <td>
                 <%= link_to "View", intl_store_path(s), class: 'btn btn-default btn-sm',
                             target: '_blank' %>

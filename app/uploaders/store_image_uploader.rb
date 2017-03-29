@@ -28,6 +28,10 @@ class StoreImageUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
+  version :tiny_thumb do
+    process resize_to_fit: [50, 50]
+  end
+
   version :thumb do
     process :resize_to_fit => [200, 200]
   end
