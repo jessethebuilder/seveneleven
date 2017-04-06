@@ -16,21 +16,29 @@
     <div class="row">
       <div class="col-xs-12">
         <% NA_HEADERS.each do |h| %>
-          <p>
-            <%= h.to_s.titlecase %>:
-            <strong>
-              <%= @na_store.send(h) %>
-            </strong>
-          </p>
+          <% if h == :file_name %>
+          <% # This is done to switch fz_image with file_name (below) %>
+            <p>
+              Fz Image:
+              <% if @na_store.fz_image? %>
+                <%= image_tag @na_store.fz_image.url(:thumb) %>
+              <% else %>
+                <strong>No Store Image</strong>
+              <% end %>
+            </p>
+          <% else %>
+            <p>
+              <%= h.to_s.titlecase %>:
+              <strong>
+                <%= @na_store.send(h) %>
+              </strong>
+            </p>
+          <% end %>
         <% end %>
 
         <p>
-          Store Image:
-          <% if @na_store.store_image? %>
-            <%= image_tag @na_store.store_image.url(:thumb) %>
-          <% else %>
-            <strong>No Store Image</strong>
-          <% end %>
+          File Name:
+          <%= @na_store.file_name %>
         </p>
       </div>
     </div>

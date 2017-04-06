@@ -1,0 +1,17 @@
+.edit_all_table{
+  body{
+    background-color: white;
+  }
+
+  input[type="text"], input[type="file"]{
+    min-width: 150px;
+  }
+
+  .editing{
+    background-color: rgba($brand-danger, 0.5);
+  }
+
+  .edited{
+    background-color: rgba($brand-primary, 0.5);
+  }
+}

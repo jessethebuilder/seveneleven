@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :na_stores
+  resources :na_stores do
+    collection do
+      get 'edit_all'
+    end
+  end
+
   resources :intl_stores
   resources :playlists, except: [:new, :create] do
     member do

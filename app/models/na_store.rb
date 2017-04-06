@@ -3,7 +3,7 @@ class NaStore
 
   has_and_belongs_to_many :playlists
 
-  attr_accessor :store_image_cache, :remote_store_image_url
+  attr_accessor :fz_image_cache, :remote_fz_image_url
 
 
   def NaStore.bool_types
@@ -26,6 +26,6 @@ class NaStore
     field f, type: type
   end
 
-  field :store_image
-  mount_uploader :store_image, StoreImageUploader
+  field :fz_image
+  mount_uploader :fz_image, StoreImageUploader
 end

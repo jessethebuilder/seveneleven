@@ -5,16 +5,20 @@
       <div class="row">
         <div class="col-xs-12">
           <% if @show_all %>
-            <%= quick_options ["Show Mine", playlists_path(:show_mine => 'true')] %>
+            <%= quick_options ["My Playlists", playlists_path(:show_mine => 'true')] %>
           <% else %>
-            <%= quick_options ['Show All', playlists_path] %>
+            <%= quick_options ['All Playlists', playlists_path] %>
           <% end %>
         </div>
       </div>
     </div>
   <% end %>
 
-  <%= page_header "Playlists" %>
+  <% if @show_all %>
+    <%= page_header "All Playlists" %>
+  <% else %>
+    <%= page_header "My Playlists" %>
+  <% end %>
 
   <div class="container">
     <div class="row">
@@ -23,8 +27,8 @@
           <thead>
             <th>Name</th>
             <th>User</th>
-            <th>North America Count</th>
-            <th>International Count</th>
+            <th>NA</th>
+            <th>INTL</th>
             <th><th>
             <th></th>
             <th></th>
@@ -63,7 +67,7 @@
                     <%= 'LIVE' %>
                   <% else %>
                     <%= link_to 'GO LIVE!', go_live_playlist_path(pl, show_mine: params[:show_mine]),
-                          class: 'btn btn-primary btn-sm' %>
+                          class: 'btn btn-primary btn-lg' %>
                   <% end %>
                 <td>
                   <%= link_to "Edit", edit_playlist_path(pl),

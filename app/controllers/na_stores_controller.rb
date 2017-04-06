@@ -1,7 +1,7 @@
 class NaStoresController < ApplicationController
   before_action :set_na_store, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  before_action :authenticate_admin!, only: [:destroy]
+  before_action :authenticate_admin!, only: [:destroy, :edit_all]
 
   # GET /na_stores
   # GET /na_stores.json
@@ -10,6 +10,12 @@ class NaStoresController < ApplicationController
     order_direction = params[:order_direction] || 'asc'
     filter_bys = params[:filter_bys]
     filter_terms = params[:filter_terms]
+
+    if params[:view_all] == 'true'
+      count = NaStore.count
+    else
+      count = 50
+    end
 
     if(filter_bys && filter_terms)
       bys = filter_bys.split(',')
@@ -23,11 +29,40 @@ class NaStoresController < ApplicationController
         end
       end
 
-      @na_stores =  na_stores.order(order_by => order_direction).page(params[:page]).per(50)
+      @na_stores =  na_stores.order(order_by => order_direction).page(params[:page]).per(count)
     else
       @na_stores = NaStore.all.
                           order(order_by => order_direction).
-                          page(params[:page]).per(50)
+                          page(params[:page]).per(count)
+    end
+  end
+
+  def edit_all
+    order_by = params[:order_by] || "location"
+    order_direction = params[:order_direction] || 'asc'
+    filter_bys = params[:filter_bys]
+    filter_terms = params[:filter_terms]
+
+    # count = NaStore.count
+    count = 10
+
+    if(filter_bys && filter_terms)
+      bys = filter_bys.split(',')
+      # .inject(''){ |n, s| s += "#{n} = ?"}
+      terms = filter_terms.split(',')
+      na_stores = NaStore.where(bys[0] => /#{terms[0]}/i)
+
+      bys.each_with_index do |b, i|
+        unless i == 0
+          na_stores = na_stores.where(b => /#{terms[i]}/i)
+        end
+      end
+
+      @na_stores =  na_stores.order(order_by => order_direction).page(params[:page]).per(count)
+    else
+      @na_stores = NaStore.all.
+                          order(order_by => order_direction).
+                          page(params[:page]).per(count)
     end
   end
 
@@ -68,6 +103,7 @@ class NaStoresController < ApplicationController
       if @na_store.update(na_store_params)
         format.html { redirect_to @na_store, notice: 'Na store was successfully updated.' }
         format.json { render :show, status: :ok, location: @na_store }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @na_store.errors, status: :unprocessable_entity }
@@ -100,6 +136,6 @@ class NaStoresController < ApplicationController
                                        :open_date, :close_date, :vicinity, :phone_number, :cdc_code, :cdc_name,
                                        :wholesale_center, :dma_code, :dma_name, :wholesale_center, :alcohol_flag,
                                        :liquor_flag, :gas_flag, :gas_brand, :bcp, :store_name, :store_type, :region, :fc_email,
-                                       :store_image, :store_image_cache, :remote_store_image_url, :remove_store_image)
+                                       :fz_image, :fz_image_cache, :remote_fz_image_url, :remove_fz_image)
     end
 end

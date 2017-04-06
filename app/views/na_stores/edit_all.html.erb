@@ -1,0 +1,95 @@
+<style>
+
+</style>
+
+<div id="edit_all_na_stores" class="edit_all_table">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <%= quick_options ["Add Store", new_na_store_path] %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <table id="na_store_table" class="table store_table">
+          <thead>
+            <th>Fz Image</th>
+            <% NA_HEADERS.each do |h| %>
+              <th>
+                <%= link_to h.to_s.titlecase, "#", data: {order_by: h.to_s, filter_by: h.to_s} %>
+              </th>
+            <% end %>
+          </thead>
+
+          <tbody>
+            <% @na_stores.each do |s| %>
+              <%= content_tag :tr, data: {store_id: s.id} do %>
+                <%= form_for s, remote: true do |f| %>
+                  <td>
+                    <%= f.file_field :fz_image, class: 'form-control' %>
+                  </td>
+                  <% NA_HEADERS.each do |h| %>
+                    <td>
+                      <% if NaStore.bool_types.include?(h) %>
+                        <%= f.check_box h, form: "edit_na_store_#{s.id.to_s}" %>
+                      <% else %>
+                        <%= f.text_field h, form: "edit_na_store_#{s.id.to_s}", class: 'form-control' %>
+                      <% end %>
+                    </td>
+                  <% end %>
+                <% end # form %>
+              <% end # tr %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function editAllTable(table_selector){
+    this.table = $(table_selector);
+    this.inputs = this.table.find('input');
+    this.current_row_id;
+
+    this.trackEdits = function(){
+      var t = this;
+      this.inputs.change(function(){
+        var row = $(this).closest('tr');
+        t.current_row_id = row.attr('data-store-id');
+        row.addClass('editing');
+      });
+
+      this.inputs.focus(function(){
+        var row = $(this).closest('tr');
+
+        var store_id = row.attr('data-store-id');
+        if(typeof t.current_row_id != 'undefined' && store_id != t.current_row_id){
+          // if new row is selected
+          var form = row.find('form');
+          form.submit();
+        }
+      });
+    }
+
+    this.init = function(){
+      this.trackEdits();
+    }
+  }
+
+
+</script>
+
+<script>
+  $(document).ready(function(){
+    // activateTable('#na_store_table', 'location', 'asc');
+    // updateCurrentPlaylistOnCheck('na');
+
+    var e = new editAllTable('#na_store_table');
+    e.init();
+  });
+</script>
