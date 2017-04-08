@@ -50,8 +50,8 @@ class NaStoresController < ApplicationController
     filter_bys = params[:filter_bys]
     filter_terms = params[:filter_terms]
 
-    count = NaStore.count
-    # count = 10
+    # count = NaStore.count
+    count = 1000
 
     if(filter_bys && filter_terms)
       bys = filter_bys.split(',')
