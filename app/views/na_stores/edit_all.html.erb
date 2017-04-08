@@ -47,6 +47,8 @@
         </table>
       </div>
     </div>
+
+      <%= render partial: 'parts/pagination', locals: {collection: @na_stores} %>
   </div>
 </div>
 
@@ -73,7 +75,7 @@
           var old_row = $('tr[data-store-id="' + t.current_row_id + '"]');
           var form = old_row.find('form');
           form.submit();
-        } 
+        }
       });
     }
 
