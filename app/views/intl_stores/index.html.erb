@@ -2,7 +2,8 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <%= quick_options ["Add Store", new_intl_store_path] %>
+        <%= quick_options ["Add Store", new_intl_store_path],
+                          ["CSV", intl_stores_path(format: :csv)] %>
       </div>
     </div>
   </div>

@@ -29,6 +29,11 @@ class IntlStoresController < ApplicationController
                           order(order_by => order_direction).
                           page(params[:page]).per(50)
     end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @intl_stores.to_csv }
+    end
   end
 
   # GET /intl_stores/1
@@ -95,6 +100,6 @@ class IntlStoresController < ApplicationController
     def intl_store_params
       params.require(:intl_store).permit(:country, :founded, :stores, :fun_fact, :video, :first_location,
                                          :lat_long, :lat, :long, :pin_address_for_store_drop,
-                                         :store_image, :remote_store_image_url, :store_image_cache)
+                                         :fz_image, :remote_fz_image_url, :fz_image_cache)
     end
 end

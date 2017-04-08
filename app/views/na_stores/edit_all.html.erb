@@ -26,7 +26,7 @@
 
           <tbody>
             <% @na_stores.each do |s| %>
-              <%= content_tag :tr, data: {store_id: s.id} do %>
+              <%= content_tag :tr, data: {store_id: s.id.to_s}, class: 'outer_row' do %>
                 <%= form_for s, remote: true do |f| %>
                   <td>
                     <%= f.file_field :fz_image, class: 'form-control' %>
@@ -59,20 +59,21 @@
     this.trackEdits = function(){
       var t = this;
       this.inputs.change(function(){
-        var row = $(this).closest('tr');
+        var row = $(this).closest('.outer_row');
         t.current_row_id = row.attr('data-store-id');
+        row.removeClass('edited');
         row.addClass('editing');
       });
 
       this.inputs.focus(function(){
-        var row = $(this).closest('tr');
-
-        var store_id = row.attr('data-store-id');
+        var new_row = $(this).closest('.outer_row');
+        var store_id = new_row.attr('data-store-id');
         if(typeof t.current_row_id != 'undefined' && store_id != t.current_row_id){
           // if new row is selected
-          var form = row.find('form');
+          var old_row = $('tr[data-store-id="' + t.current_row_id + '"]');
+          var form = old_row.find('form');
           form.submit();
-        }
+        } 
       });
     }
 
@@ -86,8 +87,8 @@
 
 <script>
   $(document).ready(function(){
-    // activateTable('#na_store_table', 'location', 'asc');
-    // updateCurrentPlaylistOnCheck('na');
+    activateTable('#na_store_table', 'location', 'asc');
+    updateCurrentPlaylistOnCheck('na');
 
     var e = new editAllTable('#na_store_table');
     e.init();

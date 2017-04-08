@@ -1,1 +1,1 @@
-console.log('<%= j @na_store.id.to_s %>');
+$('tr[data-store-id="' + '<%= j @na_store.id.to_s %>' + '"]').removeClass('editing').addClass('edited');

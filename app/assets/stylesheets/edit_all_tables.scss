@@ -1,10 +1,13 @@
 .edit_all_table{
-  body{
+  table{
     background-color: white;
   }
 
-  input[type="text"], input[type="file"]{
-    min-width: 150px;
+  .outer_row{
+    input[type="text"], input[type="file"]{
+      min-width: 150px;
+    }
+
   }
 
   .editing{

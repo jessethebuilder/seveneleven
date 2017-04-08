@@ -25,9 +25,9 @@
         <% end %>
 
         <p>
-          Store Image:
-          <% if @intl_store.store_image? %>
-            <%= image_tag @intl_store.store_image.url(:thumb) %>
+          Fz Image:
+          <% if @intl_store.fz_image? %>
+            <%= image_tag @intl_store.fz_image.url(:thumb) %>
           <% else %>
             <strong>No Store Image</strong>
           <% end %>

@@ -5,7 +5,8 @@
         <%= quick_options  %>
         <% if user_is_admin? %>
           <%= quick_options ["Add Store", new_na_store_path],
-                            ["Edit All", edit_all_na_stores_path] %>
+                            ["Edit All", edit_all_na_stores_path],
+                            ["CSV", na_stores_path(format: :csv)] %>
         <% else %>
           <%= quick_options ["Add Store", new_na_store_path] %>
         <% end %>

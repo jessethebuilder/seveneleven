@@ -1,3 +1,5 @@
+
+
 class NaStoresController < ApplicationController
   before_action :set_na_store, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
@@ -35,6 +37,11 @@ class NaStoresController < ApplicationController
                           order(order_by => order_direction).
                           page(params[:page]).per(count)
     end
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @na_stores.to_csv }
+    end
   end
 
   def edit_all
@@ -43,8 +50,8 @@ class NaStoresController < ApplicationController
     filter_bys = params[:filter_bys]
     filter_terms = params[:filter_terms]
 
-    # count = NaStore.count
-    count = 10
+    count = NaStore.count
+    # count = 10
 
     if(filter_bys && filter_terms)
       bys = filter_bys.split(',')
