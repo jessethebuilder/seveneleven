@@ -29,7 +29,7 @@
               <%= content_tag :tr, data: {store_id: s.id.to_s}, class: 'outer_row' do %>
                 <%= form_for s, remote: true do |f| %>
                   <td>
-                    <%= f.file_field :fz_image, class: 'form-control' %>
+                    <%= f.file_field :fz_image, class: 'form-control', form: "edit_na_store_#{s.id.to_s}" %>
                   </td>
                   <% NA_HEADERS.each do |h| %>
                     <td>
@@ -74,8 +74,43 @@
           // if new row is selected
           var old_row = $('tr[data-store-id="' + t.current_row_id + '"]');
           var form = old_row.find('form');
+          t.uploadFile(form, 'fz_image');
           form.submit();
+
         }
+      });
+    }
+
+    this.uploadFile = function(form, field){
+      var file_field = form.closest('tr').find('#na_store_' + field);
+      // only 1 file per file field
+      var file = file_field[0].files[0];
+      if(typeof file != 'undefined'){
+        this.readFile(file).then(function(file_data){
+          var action = form.attr('action');
+
+          $.ajax({
+            url: action + '.js',
+            method: 'PUT',
+            data: {
+              na_store: {
+                fz_image: file_data
+                // field: file_data
+              }
+            }
+          });
+        });
+      }
+    }
+
+    this.readFile = function(file){
+      return new Promise(function(fulfill, reject){
+        var reader = new FileReader();
+        reader.onload = function(e){
+          var file_data = e.target.result;
+          fulfill(file_data);
+        }
+        reader.readAsDataURL(file);
       });
     }
 

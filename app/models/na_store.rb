@@ -27,7 +27,7 @@ class NaStore
   end
 
   field :fz_image
-  mount_uploader :fz_image, StoreImageUploader
+  # mount_uploader :fz_image, StoreImageUploader
 
   def self.all_headers
     a = NA_HEADERS

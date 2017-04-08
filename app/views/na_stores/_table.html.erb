@@ -38,7 +38,7 @@
             <%= link_to 'NBLC Highlight', '#', data: {order_by: 'nblc_highlight'} %>
           </th>
           <th>
-            <%= link_to 'Image', '#', data: {order_by: 'fz_image'} %>
+            <%= link_to 'Fz Image', '#', data: {order_by: 'fz_image'} %>
           </th>
           <th></th>
           <th></th>
@@ -61,7 +61,8 @@
               <td><%= s.nblc_member %></td>
               <td><%= s.nblc_highlight %></td>
               <td>
-                <%= image_tag s.fz_image.url(:tiny_thumb) if s.fz_image? %>
+                <%#= image_tag s.fz_image.url(:tiny_thumb) if s.fz_image? %>
+                <%= image_tag s.fz_image, width: '40px' if s.fz_image? %>
               </td>
               <td>
                 <%= link_to "View", na_store_path(s), class: 'btn btn-default btn-sm',

@@ -16,7 +16,7 @@ class NaStoresController < ApplicationController
     if params[:view_all] == 'true'
       count = NaStore.count
     else
-      count = 50
+      count = 200
     end
 
     if(filter_bys && filter_terms)
@@ -51,7 +51,7 @@ class NaStoresController < ApplicationController
     filter_terms = params[:filter_terms]
 
     # count = NaStore.count
-    count = 500
+    count = 200
 
     if(filter_bys && filter_terms)
       bys = filter_bys.split(',')
