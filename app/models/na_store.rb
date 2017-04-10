@@ -1,5 +1,9 @@
+require "#{Rails.root}/lib/assets/s3_helper"
+require 'open-uri'
+
 class NaStore
   include Mongoid::Document
+  include S3Helper
 
   has_and_belongs_to_many :playlists
 
@@ -29,6 +33,7 @@ class NaStore
   end
 
   field :fz_image
+  field :fz_image_thumb
   # mount_uploader :fz_image, StoreImageUploader
 
   def self.all_headers
@@ -53,35 +58,22 @@ class NaStore
   # private
 
   def save_fz_image_to_s3
-    if fz_image && fz_image =~ /^data:/
+    img = attributes[:fz_image]
+    if img && img =~ /^data:/
+      # puts '.........................................................'
+      # puts img
+      # puts '.........................................................'
       # if image is a data url
-      self.fz_image = save_file_to_s3(self.fz_image, "fz_image_#{location}")
+      # img = URI::Data.new(file_data)
+
+      self.fz_image = save_file_data_to_s3(img, "fz_images/#{location}")
+
+      # thumb = MiniMagick::Image.open(self.fz_image)
+      # thumb.resize('50x50')
+      # self.fz_image_thumb = thumb.to_blob
+      # self.fz_image_thumb = save_file_to_s3(thumb, "fz_images/thumbs/#{location}")
+
+      # self.fz_image_thumb = save_file_data_to_s3(thumb, "fz_images/thumbs/#{location}")
     end
-  end
-
-
-
-  def save_file_to_s3(file_data, file_name)
-    puts file_data
-    img = URI::Data.new(file_data)
-
-    # Get file extention and type
-    c = img.content_type.split('/')
-    type = c[0]
-
-    # Move data to S3, and save URL of created resource
-    ext = c[1]
-
-    # Build a file path for s3
-    # file_name = "na_store_fz_image_#{location}"
-    path = "#{file_name}.#{ext}"
-
-    # S3_BUCKET is set up in aws initializer
-    saved_img = S3_BUCKET.object(path)
-    # Save to S3
-    saved_img.put(body: img.data, acl:'public-read')
-
-    # Assign the S3 Url for the image to the image attribute
-    return "#{S3_BUCKET.url}/#{path}"
   end
 end

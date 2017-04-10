@@ -1,1 +1,2 @@
-$('tr[data-store-id="' + '<%= j @na_store.id.to_s %>' + '"]').removeClass('editing').addClass('edited');
+var row = $('tr[data-store-id="' + '<%= j @na_store.id.to_s %>' + '"]');
+row.removeClass('editing').addClass('edited');

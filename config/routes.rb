@@ -3,6 +3,10 @@ Rails.application.routes.draw do
     collection do
       get 'edit_all'
     end
+
+    member do
+      delete 'delete_fz_image'
+    end
   end
 
   resources :intl_stores

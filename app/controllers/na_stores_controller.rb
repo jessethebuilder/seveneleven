@@ -1,7 +1,5 @@
-
-
 class NaStoresController < ApplicationController
-  before_action :set_na_store, only: [:show, :edit, :update, :destroy]
+  before_action :set_na_store, only: [:show, :edit, :update, :destroy, :delete_fz_image]
   before_action :authenticate_user!
   before_action :authenticate_admin!, only: [:destroy, :edit_all]
 
@@ -44,6 +42,10 @@ class NaStoresController < ApplicationController
     end
   end
 
+  def delete_fz_image
+    @na_store.update_attribute(:fz_image, nil)
+  end
+
   def edit_all
     order_by = params[:order_by] || "location"
     order_direction = params[:order_direction] || 'asc'
@@ -51,7 +53,7 @@ class NaStoresController < ApplicationController
     filter_terms = params[:filter_terms]
 
     # count = NaStore.count
-    count = 10
+    count = 200
 
     if(filter_bys && filter_terms)
       bys = filter_bys.split(',')

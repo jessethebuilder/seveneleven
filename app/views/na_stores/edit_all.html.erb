@@ -29,7 +29,19 @@
               <%= content_tag :tr, data: {store_id: s.id.to_s}, class: 'outer_row' do %>
                 <%= form_for s, remote: true do |f| %>
                   <td>
-                    <%= f.file_field :fz_image, class: 'form-control', form: "edit_na_store_#{s.id.to_s}" %>
+                    <div class="fz_image">
+                      <% if s.fz_image %>
+                        <div class="thumb">
+                          <%= image_tag s.fz_image, width: '40px' %>
+                          <%= link_to 'edit', 'edit_fz_image', class: 'edit_fz_image_control btn btn-warning btn-sm' %>
+                          <%= link_to 'delete', 'delete_fz_image', class: 'delete_fz_image_control btn btn-danger btn-sm' %>
+                        </div>
+
+                        <%= f.file_field :fz_image, class: 'form-control hidden', form: "edit_na_store_#{s.id.to_s}" %>
+                      <% else %>
+                        <%= f.file_field :fz_image, class: 'form-control', form: "edit_na_store_#{s.id.to_s}" %>
+                      <% end %>
+                    </div>
                   </td>
                   <% NA_HEADERS.each do |h| %>
                     <td>
@@ -53,72 +65,6 @@
 </div>
 
 <script>
-  function editAllTable(table_selector){
-    this.table = $(table_selector);
-    this.inputs = this.table.find('input');
-    this.current_row_id;
-
-    this.trackEdits = function(){
-      var t = this;
-      this.inputs.change(function(){
-        var row = $(this).closest('.outer_row');
-        t.current_row_id = row.attr('data-store-id');
-        row.removeClass('edited');
-        row.addClass('editing');
-      });
-
-      this.inputs.focus(function(){
-        var new_row = $(this).closest('.outer_row');
-        var store_id = new_row.attr('data-store-id');
-        if(typeof t.current_row_id != 'undefined' && store_id != t.current_row_id){
-          // if new row is selected
-          var old_row = $('tr[data-store-id="' + t.current_row_id + '"]');
-          var form = old_row.find('form');
-          t.uploadFile(form, 'fz_image');
-          form.submit();
-
-        }
-      });
-    }
-
-    this.uploadFile = function(form, field){
-      var file_field = form.closest('tr').find('#na_store_' + field);
-      // only 1 file per file field
-      var file = file_field[0].files[0];
-      if(typeof file != 'undefined'){
-        this.readFile(file).then(function(file_data){
-          var action = form.attr('action');
-
-          $.ajax({
-            url: action + '.js',
-            method: 'PUT',
-            data: {
-              na_store: {
-                fz_image: file_data
-                // field: file_data
-              }
-            }
-          });
-        });
-      }
-    }
-
-    this.readFile = function(file){
-      return new Promise(function(fulfill, reject){
-        var reader = new FileReader();
-        reader.onload = function(e){
-          var file_data = e.target.result;
-          fulfill(file_data);
-        }
-        reader.readAsDataURL(file);
-      });
-    }
-
-    this.init = function(){
-      this.trackEdits();
-    }
-  }
-
 
 </script>
 
@@ -129,5 +75,6 @@
 
     var e = new editAllTable('#na_store_table');
     e.init();
+
   });
 </script>
