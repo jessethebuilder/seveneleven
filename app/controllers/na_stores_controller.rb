@@ -40,7 +40,7 @@ class NaStoresController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { send_data @na_stores.to_csv }
+      format.csv { send_data NaStore.all.to_csv }
     end
   end
 
@@ -51,7 +51,7 @@ class NaStoresController < ApplicationController
     filter_terms = params[:filter_terms]
 
     # count = NaStore.count
-    count = 200
+    count = 10
 
     if(filter_bys && filter_terms)
       bys = filter_bys.split(',')

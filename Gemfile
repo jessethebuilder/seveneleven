@@ -38,6 +38,10 @@ gem 'devise'
 gem 'kaminari-mongoid'
 gem 'kaminari-actionview'
 
+gem 'aws-sdk', '~> 2'
+
+gem 'data_uri'
+
 # Anysoft Gems
 gem 'farm_shed', git: 'https://github.com/jessethebuilder/farm_shed', branch: 'lite'
 gem 'farm_ruby', git: 'https://github.com/jessethebuilder/farm_ruby'
