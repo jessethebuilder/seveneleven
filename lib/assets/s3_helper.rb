@@ -20,4 +20,12 @@ module S3Helper
     # Assign the S3 Url for the image to the image attribute
     return "#{S3_BUCKET.url}/#{path}"
   end
+
+  def save_file_to_s3(file, file_name)
+
+
+    img = S3_BUCKET.object(file_name)
+    img.put(body: file, acl: 'public-read')
+    return img.public_url
+  end
 end

@@ -38,7 +38,14 @@
     </div>
   <% end %>
 
-  <%#= image_select f, :fz_image, :accepts_remote_url => true %>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.file_field :fz_image, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="col-sm-6"></div>
+  </div>
 
   <div class="row">
     <div class="col-xs-12">
@@ -48,3 +55,43 @@
     </div>
   </div>
 <% end %>
+
+<script>
+  // function readFileAsDataUri(file){
+  //   return new Promise(function(fulfill, reject){
+  //     var reader = new FileReader();
+  //     reader.onload = function(e){
+  //       var file_data = e.target.result;
+  //       fulfill(file_data);
+  //     }
+  //     reader.readAsDataURL(file);
+  //   });
+  // }
+  //
+  // function repackageFzImage(){
+  //   $('form').submit(function(e){
+  //     // e.preventDefault();
+  //     var f = $(this)[0];
+  //     var input;
+  //     for(var i = 0; i < f.elements.length; i++){
+  //       if($(f.elements[i]).attr('name') == 'na_store[fz_image]'){
+  //         input = f.elements[i];
+  //         break;
+  //       }
+  //     }
+  //
+  //     var file = input.files[0];
+  //     if(typeof file != 'undefined'){
+  //       // if fz_image has a value
+  //       readFileAsDataUri(file).then(function(file_data){
+  //         $(input).val(file_data);
+  //         return true;
+  //       });
+  //     }
+  //   });
+  // }
+  //
+  // $(document).ready(function(){
+  //   repackageFzImage();
+  // });
+</script>

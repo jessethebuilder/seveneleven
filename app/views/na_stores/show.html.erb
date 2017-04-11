@@ -21,7 +21,7 @@
             <p>
               Fz Image:
               <% if @na_store.fz_image? %>
-                <%= image_tag @na_store.fz_image.url(:thumb) %>
+                <%= image_tag @na_store.fz_image, width: '200px' %>
               <% else %>
                 <strong>No Store Image</strong>
               <% end %>
