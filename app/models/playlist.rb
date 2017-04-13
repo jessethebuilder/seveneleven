@@ -19,6 +19,8 @@ class Playlist
     puts 'Not yet implemented'
   end
 
+  scope :live, -> { where(:live => true ) }
+
   private
 
   def name_if_published

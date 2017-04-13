@@ -67,15 +67,19 @@ public
   # GET /playlists.json
   def index
     if user_is_admin? && !params[:show_mine]
-      @show_all = true
+      # @show_all = true
       @playlists = Playlist.published.order(:user_id => :asc)
     else
       @playlists = current_user.playlists.published
     end
 
-    # if in_playlist_edit_mode?
-    #   @waiting_playlist = current_user.playlists.unpublished.first
-    # end
+    respond_to do |format|
+      format.html
+      format.json do
+        @playlists = @playlists.live
+
+      end
+    end
   end
 
   # GET /playlists/1
