@@ -5,6 +5,13 @@ module UserHelper
     end
   end
 
+  def authenticate_user_unless_json!
+    puts '...........  '
+    puts request.format
+    puts '...........'
+    authenticate_user! unless request.format == "application/json"
+  end
+
   def user_is_admin?
     user_signed_in? && current_user.admin?
   end

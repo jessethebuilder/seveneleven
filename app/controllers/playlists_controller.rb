@@ -1,6 +1,7 @@
 class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:show, :edit, :update, :destroy, :go_live]
   before_action :authenticate_user!, except: [:show, :index]
+  before_action :authenticate_user_unless_json!, only: [:show, :index]
 
   def go_live
     user = @playlist.user
@@ -69,8 +70,10 @@ public
     if user_is_admin? && !params[:show_mine]
       # @show_all = true
       @playlists = Playlist.published.order(:user_id => :asc)
-    else
+    elsif user_signed_in?
       @playlists = current_user.playlists.published
+    else
+      @playlists = Playlist.all
     end
 
     respond_to do |format|
