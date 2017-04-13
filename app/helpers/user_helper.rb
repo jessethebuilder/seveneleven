@@ -6,9 +6,6 @@ module UserHelper
   end
 
   def authenticate_user_unless_json!
-    puts '...........  '
-    puts request.format
-    puts '...........'
     authenticate_user! unless request.format == "application/json"
   end
 
@@ -43,12 +40,14 @@ module UserHelper
   end
 
   def activate_playlist_edit_mode(playlist)
+    playlist.update_attribute(:published, false)
     session[:current_playlist_id] = playlist.id
     # playlist = session_playlist
     # playlist.update(:published, false) if playlist
   end
 
-  def deactivate_playlist_edit_mode
+  def deactivate_playlist_edit_mode(playlist)
+    playlist.update_attribute(:published, true)
     session[:current_playlist_id] = nil
     # playlist = session_playlist
     # playlist.update(:published, true) if playlist

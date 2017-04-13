@@ -67,19 +67,19 @@ public
   # GET /playlists
   # GET /playlists.json
   def index
-    if user_is_admin? && !params[:show_mine]
-      # @show_all = true
-      @playlists = Playlist.published.order(:user_id => :asc)
-    elsif user_signed_in?
-      @playlists = current_user.playlists.published
-    else
-      @playlists = Playlist.all
-    end
 
     respond_to do |format|
-      format.html
+      format.html do
+        if user_is_admin? && !params[:show_mine]
+          # @show_all = true
+          @playlists = Playlist.published.order(:user_id => :asc)
+        else user_signed_in?
+          @playlists = current_user.playlists.published
+        end
+      end
+
       format.json do
-        @playlists = @playlists.live
+        @playlists = Playlist.live
 
       end
     end
@@ -103,7 +103,7 @@ public
   def update
     respond_to do |format|
       if @playlist.update(playlist_params)
-        deactivate_playlist_edit_mode
+        deactivate_playlist_edit_mode(@playlist)
         unless params[:skip_flash]
           format.html { redirect_to playlists_url, notice: "#{@playlist.name} was Saved." }
         else
