@@ -63,19 +63,18 @@ class NaStore
 
   def save_fz_image_to_s3
     img = self.fz_image
-    img.original_filename =~ /\.(.+)$/
-    ext = $1
+    unless img.class == String
+      # Do only if file. Not if a file has already been saved. 
+      img.original_filename =~ /\.(.+)$/
+      ext = $1
 
-    file_name = "fz_images/#{self.location}.#{ext}"
-    if img && img =~ /^data:/
-      self.fz_image = save_file_data_to_s3(img, file_name)
-    elsif img.class == ActionDispatch::Http::UploadedFile
-      self.fz_image = save_file_to_s3(img, file_name)
+      file_name = "fz_images/#{self.location}.#{ext}"
+      if img && img =~ /^data:/
+        self.fz_image = save_file_data_to_s3(img, file_name)
+      elsif img.class == ActionDispatch::Http::UploadedFile
+        self.fz_image = save_file_to_s3(img, file_name)
+      end
     end
-    #
-    # thumb = MiniMagick::Image.open(self.fz_image)
-    # thumb.resize('50x50')
-    # self.fz_image_thumb = save_file_to_s3(IO.read(thumb.to_s), "fz_images/thumbs/#{self.location}.#{ext}")
   end
 
 
