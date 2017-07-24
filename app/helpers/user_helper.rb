@@ -40,14 +40,14 @@ module UserHelper
   end
 
   def activate_playlist_edit_mode(playlist)
-    playlist.update_attribute(:published, false)
+    # playlist.update_attribute(:published, false)
     session[:current_playlist_id] = playlist.id
     # playlist = session_playlist
     # playlist.update(:published, false) if playlist
   end
 
   def deactivate_playlist_edit_mode(playlist)
-    playlist.update_attribute(:published, true)
+    # playlist.update_attribute(:published, true)
     session[:current_playlist_id] = nil
     # playlist = session_playlist
     # playlist.update(:published, true) if playlist

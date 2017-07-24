@@ -5,6 +5,8 @@ class NaStore
   include Mongoid::Document
   include S3Helper
 
+  field :stores, type: Integer
+
   has_and_belongs_to_many :playlists
 
   attr_accessor :fz_image_cache, :remote_fz_image_url
@@ -70,7 +72,7 @@ class NaStore
     elsif img.class == ActionDispatch::Http::UploadedFile
       self.fz_image = save_file_to_s3(img, file_name)
     end
-    # 
+    #
     # thumb = MiniMagick::Image.open(self.fz_image)
     # thumb.resize('50x50')
     # self.fz_image_thumb = save_file_to_s3(IO.read(thumb.to_s), "fz_images/thumbs/#{self.location}.#{ext}")

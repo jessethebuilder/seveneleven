@@ -13,6 +13,9 @@
             <%= link_to 'Location', "#", data: {order_by: 'location', filter_by: 'location'} %>
           </th>
           <th>
+            <%= link_to 'Stores', '#', data: {order_by: 'stores', filter_by: 'stores'} %>
+          </th>
+          <th>
             <%= link_to 'Franchisee', '#', data: {order_by: 'fz_name', filter_by: 'fz_name'} %>
           </th>
           <th>
@@ -52,6 +55,7 @@
             <tr>
               <td><%= check_box_tag s.id, s.id, is_in_current_playlist?(s), class: 'store_select' %></td>
               <td><%= s.location %></td>
+              <td><%= s.stores %></td>
               <td><%= s.fz_name %></td>
               <td><%= s.address %></td>
               <td><%= s.city %></td>

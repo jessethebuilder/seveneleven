@@ -139,6 +139,7 @@ class NaStoresController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def na_store_params
       params.require(:na_store).permit(:nblc_highlight, :nblc_member_photo, :nblc_member, :file_name, :location,
+                                       :stores,
                                        :fz_name, :zone_code, :zone_name, :market_code, :market, :market_manager,
                                        :field_consultant_name, :store_manager, :store_type, :address, :city,
                                        :state_or_province, :postal_code, :country, :open_status_code,
