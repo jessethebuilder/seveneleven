@@ -63,8 +63,8 @@ class NaStore
 
   def save_fz_image_to_s3
     img = self.fz_image
-    unless img.class == String
-      # Do only if file. Not if a file has already been saved. 
+    unless img.nil? || img.class == String
+      # Do only if file. Not if a file has already been saved.
       img.original_filename =~ /\.(.+)$/
       ext = $1
 
