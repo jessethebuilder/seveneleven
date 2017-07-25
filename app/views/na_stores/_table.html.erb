@@ -1,3 +1,7 @@
+<style>
+
+</style>
+
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
@@ -45,6 +49,7 @@
           </th>
           <th></th>
           <th></th>
+          <th></th>
           <% if user_is_admin? %>
            <th></th>
           <% end %>
@@ -52,7 +57,7 @@
 
         <tbody>
           <% na_stores.each do |s| %>
-            <tr>
+            <%= content_tag :tr, data: {'sort-order-id' => s.to_param} do %>
               <td><%= check_box_tag s.id, s.id, is_in_current_playlist?(s), class: 'store_select' %></td>
               <td><%= s.location %></td>
               <td><%= s.stores %></td>
@@ -83,10 +88,41 @@
                               data: {confirm: "Are you sure? This is peranent!"} %>
                 </td>
               <% end %>
-            </tr>
+              <td>
+                <span class="glyphicon glyphicon-plus drag_handle"></span>
+              </td>
+            <% end # tr %>
           <% end %>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+
+<script>
+
+
+  function afterDragNaStoreCallback(order){
+    var playlist_id = $('#edit_playlist').data('playlist-id');
+
+    $.ajax({
+      method: 'PUT',
+      url: '/playlists/' + playlist_id,
+      data:{
+        playlist: {
+          na_store_order: order
+        }
+      },
+      dataType: 'json',
+      format: 'json',
+      complete: function(response){
+        console.log(response);
+      }
+    });
+  }
+
+  $(document).ready(function(){
+    var d = new DragSortTable('#na_store_table');
+    d.init(afterDragNaStoreCallback);
+  });
+</script>

@@ -5,8 +5,6 @@ class NaStore
   include Mongoid::Document
   include S3Helper
 
-  field :stores, type: Integer
-
   has_and_belongs_to_many :playlists
 
   attr_accessor :fz_image_cache, :remote_fz_image_url
@@ -19,7 +17,7 @@ class NaStore
   end
 
   def NaStore.int_types
-    [:location]
+    [:location, :stores]
   end
 
   NA_HEADERS.each do |f|

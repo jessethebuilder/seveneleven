@@ -1,3 +1,5 @@
+@import 'jquery-ui/sortable';
+
 @import 'variables';
 @import 'bootstrap';
 @import 'farm_shed/all';
@@ -26,4 +28,18 @@ body{
   .quick_option_selected{
     border-right-color: $brand-danger !important;
   }
+}
+
+.ui-sortable-helper {
+  display: table;
+}
+
+.sorting{
+  border: 1px solid black;
+  opacity: .40;
+}
+
+.drag_handle:hover{
+  cursor: pointer;
+  cursor: grab;
 }

@@ -1,4 +1,4 @@
-<div id="edit_playlist">
+<%= content_tag :div, id: 'edit_playlist', data: {playlist_id: @playlist.to_param} do %>
   <%= page_header "Edit Playlist" %>
 
   <div class="container">
@@ -36,7 +36,7 @@
         <div class="row">
           <div class="col-xs-12">
             <h2>North American Stores</h2>
-            <%= render partial: 'na_stores/table', locals: {na_stores: @playlist.na_stores} %>
+            <%= render partial: 'na_stores/table', locals: {na_stores: @na_stores} %>
           </div>
         </div>
       <% end %>
@@ -45,14 +45,13 @@
         <div class="row">
           <div class="col-xs-12">
             <h2>International Stores</h2>
-            <%= render partial: 'intl_stores/table', locals: {intl_stores: @playlist.intl_stores} %>
+            <%= render partial: 'intl_stores/table', locals: {intl_stores: @intl_stores} %>
           </div>
         </div>
       <% end %>
     </div>
   <% end %>
-</div>
-
+<% end %>
 
 <script>
   $(document).ready(function(){

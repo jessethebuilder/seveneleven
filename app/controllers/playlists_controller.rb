@@ -2,6 +2,7 @@ class PlaylistsController < ApplicationController
   before_action :set_playlist, only: [:show, :edit, :update, :destroy, :go_live]
   before_action :authenticate_user!, except: [:show, :index]
   before_action :authenticate_user_unless_json!, only: [:show, :index]
+  before_action :set_stores_variables, only: [:show, :edit]
 
   def go_live
     user = @playlist.user
@@ -128,6 +129,45 @@ public
   end
 
   private
+    def sort_by_array(collection, array, method)
+      # Sorts array so
+      a = []
+      array.each do |x|
+        x = yield(x) if block_given?
+        a << x unless x.nil?
+      end
+    end
+
+    def set_stores_variables
+      if @playlist.na_store_order.blank?
+        @na_stores = @playlist.na_stores
+      else
+        @na_stores = []
+        @playlist.na_store_order.each do |id|
+          if NaStore.where(id: id).count > 0
+            s = NaStore.find(id)
+            @na_stores << s if @playlist.na_stores.include?(s)
+          end
+        end
+
+        (@playlist.na_stores - @na_stores).each{ |s| @na_stores << s }
+      end
+
+      if @playlist.intl_store_order.blank?
+        @intl_stores = @playlist.intl_stores
+      else
+        @intl_stores = []
+        @playlist.intl_store_order.each do |id|
+          if IntlStore.where(id: id).count > 0
+            s = IntlStore.find(id)
+            @intl_stores << s if @playlist.intl_stores.include?(s)
+          end
+        end
+
+        (@playlist.intl_stores - @intl_stores).each{ |s| @intl_stores << s }
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_playlist
       @playlist = Playlist.find(params[:id])
@@ -135,6 +175,6 @@ public
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def playlist_params
-      params.require(:playlist).permit(:user_id, :name, :published)
+      params.require(:playlist).permit(:user_id, :name, :published, {:na_store_order => []}, {:intl_store_order => []})
     end
 end

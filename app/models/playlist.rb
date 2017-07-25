@@ -13,6 +13,9 @@ class Playlist
 
   field :user_to_return_to_on_publish, type: Integer
 
+  field :intl_store_order, type: Array, default: []
+  field :na_store_order, type: Array, default: []
+
   validate :name_if_published
 
   def push_as_live
@@ -28,6 +31,8 @@ class Playlist
       self.errors.add(:name, "cannot be blank")
     end
   end
+
+  public
 
   def Playlist.published
     where(:published => true)

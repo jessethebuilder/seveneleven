@@ -8,13 +8,13 @@ json.playlist do
   end
 
   json.na_stores do
-    json.array! @playlist.na_stores do |na|
+    json.array! @na_stores do |na|
       json.partial! 'na_stores/na_store.json.jbuilder',  locals: {na_store: na}
     end
   end
 
   json.intl_stores do
-    json.array! @playlist.intl_stores do |intl|
+    json.array! @intl_stores do |intl|
       json.partial! 'intl_stores/intl_store.json.jbuilder', locals: {intl_store: intl}
     end
   end
