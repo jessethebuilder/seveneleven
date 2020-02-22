@@ -32,7 +32,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 #Added Gems-------------------------------------
-gem 'bootstrap-sass', '3.0.3.0'
+gem 'bootstrap-sass', '3.4.1'
 gem 'fog'
 gem 'carrierwave'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
